@@ -1,10 +1,7 @@
 import { db, ref, set, update, push, onValue, onChildAdded} from "../modules/FirebaseUtils.js";
 
-
-
 const addSubjectButton=document.getElementById("add_subject_button");
 const subjectListContainerBox=document.getElementById("subject_list_container");
-
 
 if(document.addEventListener){
     document.addEventListener("DOMContentLoaded",function(){
