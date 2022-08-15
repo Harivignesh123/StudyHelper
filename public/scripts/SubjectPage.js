@@ -65,7 +65,8 @@ function SubjectClicked(e){
    const className=target.className;
    if(className){
         if(className=="subject_container"||className=="subject_name"){
-            
+            localStorage.setItem("test","hehe");
+            window.open("../html/ChapterPage.html","_self");
         }
         else{
             if(className=="subject_add_button"){
