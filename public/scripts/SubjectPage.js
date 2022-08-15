@@ -63,10 +63,15 @@ function AddSubject(){
 function SubjectClicked(e){
    const target=getEventTarget(e);
    const className=target.className;
+
    if(className){
-        if(className=="subject_container"||className=="subject_name"){
-            localStorage.setItem("test","hehe");
-            window.open("../html/ChapterPage.html","_self");
+        if(className=="subject_container"){
+             localStorage.setItem("subject_key",target.id);
+             window.open("../html/ChapterPage.html","_self");
+        }
+        else if(className=="subject_name"){
+             localStorage.setItem("subject_key",target.parentNode.id);
+             window.open("../html/ChapterPage.html","_self");
         }
         else{
             if(className=="subject_add_button"){
@@ -76,10 +81,10 @@ function SubjectClicked(e){
                 
                 divBox.innerHTML='<p class="subject_name">'+subjectName+'</p>';
                 divBox.className="subject_container";
-                var key=push(ref(db)).key;
+                var key=push(ref(db)).key+"❤"+subjectName;
     
                 var json={};
-                json[key]=subjectName;
+                json[key]=0;
                 
                 addSubjectButton.style.visibility="visible";
                 subjectListContainerBox.removeChild(divBox);
@@ -104,7 +109,7 @@ function addSubjectToUI(data){
 
     const divBox=document.createElement('div');
     divBox.id=data.key;
-    divBox.innerHTML='<p class="subject_name">'+data.val()+'</p>';
+    divBox.innerHTML='<p class="subject_name">'+(data.key).slice(data.key.indexOf('❤')+1)+'</p>';
     divBox.className="subject_container";
     
     subjectListContainerBox.appendChild(divBox);
