@@ -5,7 +5,7 @@ let chapterTitle=document.getElementsByClassName("chapter_title")[0];
 let addTopicButton=document.getElementsByClassName("add_topic")[0];
 
 let notesListContainerBox=document.getElementById("notes_list_container");
-
+let topicsListContainerBox=document.getElementById("topics_list_container");
 
 let subjectKey;
 let chapterKey;
@@ -64,7 +64,13 @@ function addNotesToUI(data){
     divBox.id=data.key;
     divBox.innerHTML='<fieldset><legend id="top1">'+(data.key).slice(data.key.indexOf('❤')+1)+'</legend><p>'+data.val()+'</p></fieldset>'
     divBox.className="notes_container";
+
     notesListContainerBox.appendChild(divBox);
+
+    const listItem=document.createElement('li');
+    listItem.innerHTML='<a id="'+data.key+'" href="'+data.key+'">'+(data.key).slice(data.key.indexOf('❤')+1)+'</a>';
+
+    topicsListContainerBox.getElementsByTagName('ul')[0].append(listItem);
 }
 
 function AddNotes(){
@@ -110,10 +116,21 @@ function NotesClicked(e){
      
                  var json={};
                  json[key]=notes;
-                 
+
                  addTopicButton.style.visibility="visible";
                  notesListContainerBox.removeChild(divBox);
                  update(ref(db,dbRef),json);
+
+                //  const divBox1=document.createElement('div');
+                // divBox1.id=key;
+                // divBox1.innerHTML='<fieldset><legend id="top1">'+topic+'</legend><p>'+notes+'</p></fieldset>'
+                // divBox1.className="notes_container";
+
+                // notesListContainerBox.appendChild(divBox1);
+
+                // const listItem=document.createElement('li');
+                // listItem.innerHTML='<a id="'+key+'" href="'+key+'">'+topic+'</a>';
+                // topicsListContainerBox.getElementsByTagName('ul')[0].append(listItem);
              }
              else if(className=="note_cancel_button"){
                  const divBox=target.parentNode;
