@@ -62,13 +62,13 @@ function LoadExisitngNotes(){
 function addNotesToUI(data){
     const divBox=document.createElement('div');
     divBox.id=data.key;
-    divBox.innerHTML='<fieldset><legend id="top1">'+(data.key).slice(data.key.indexOf('❤')+1)+'</legend><p>'+data.val()+'</p></fieldset>'
+    divBox.innerHTML='<fieldset><legend>'+(data.key).slice(data.key.indexOf('❤')+1)+'</legend><p>'+data.val()+'</p></fieldset>'
     divBox.className="notes_container";
 
     notesListContainerBox.appendChild(divBox);
 
     const listItem=document.createElement('li');
-    listItem.innerHTML='<a id="'+data.key+'" href="'+data.key+'">'+(data.key).slice(data.key.indexOf('❤')+1)+'</a>';
+    listItem.innerHTML='<a href="#'+data.key+'">'+(data.key).slice(data.key.indexOf('❤')+1)+'</a>';
 
     topicsListContainerBox.getElementsByTagName('ul')[0].append(listItem);
 }
