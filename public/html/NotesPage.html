@@ -1,97 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
+    <head>
+        <title>Notes Page</title>
+        <style>
+            p {
+                height: 100px;
+            }
+        </style>
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notes Page</title>
-    <style>
-        p {
-            height: 100px;
-        }
-    </style>
-</head>
+    <body>
+        <h1 class="subject_title" style="border: 1px solid black; text-align: center;">Subject Name</h1>
+        <div style="width: 100px;height:auto; float: left; border: 1px solid black;">
+            <input type="button" class="add_topic" value="add"></button>
+            <ul>
+                <a href="#top1">
+                    <li>Topic 1</li>
+                </a>
+                <a href="#top2">
+                    <li>Topic 2</li>
+                </a>
+                <a href="#top3">
+                    <li>Topic 3</li>
+                </a>
+                <a href="#top4">
+                    <li>Topic 4</li>
+                </a>
+                <a href="#top5">
+                    <li>Topic 5</li>
+                </a>
+            </ul>
+        </div>
+        <div>
+            <h2 class="chapter_title">Chapter name</h2>
+            <div id="notes_list_container">
+                <div>
+                    <fieldset>
+                        <legend>
+                            Topic 1
+                        </legend>
+                        <p>
+                            Notes....
+                        </p>
+                    </fieldset>
+                </div>
+                <div>
+                    <fieldset>
+                        <legend>
+                            Topic 2
+                        </legend>
+                        <p>
+                            Notes....
+                        </p>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
 
-<body>
-    <h1 style="border: 1px solid black; text-align: center;">Subject Name</h1>
-    <div style="width: 100px;height:auto; float: left; border: 1px solid black;">
-        <button type="button" class="add_topic"><img src="plus.png" height="15px" width="15px"></button>
-        <ul>
-            <a href="#top1">
-                <li>Topic 1</li>
-            </a>
-            <a href="#top2">
-                <li>Topic 2</li>
-            </a>
-            <a href="#top3">
-                <li>Topic 3</li>
-            </a>
-            <a href="#top4">
-                <li>Topic 4</li>
-            </a>
-            <a href="#top5">
-                <li>Topic 5</li>
-            </a>
-        </ul>
-    </div>
-    <div>
-        <fieldset>
-            <legend>
-                Chapter name
-            </legend>
-            <div>
-                <fieldset>
-                    <legend id="top1">
-                        Topic 1
-                    </legend>
-                    <p>
-                        Notes....
-                    </p>
-                </fieldset>
-            </div>
-            <div>
-                <fieldset>
-                    <legend id="top2">
-                        Topic 2
-                    </legend>
-                    <p>
-                        Notes....
-                    </p>
-                </fieldset>
-            </div>
-            <div>
-                <fieldset>
-                    <legend id="top3">
-                        Topic 3
-                    </legend>
-                    <p>
-                        Notes....
-                    </p>
-                </fieldset>
-            </div>
-            <div>
-                <fieldset>
-                    <legend id="top4">
-                        Topic 4
-                    </legend>
-                    <p>
-                        Notes....
-                    </p>
-                </fieldset>
-            </div>
-            <div>
-                <fieldset>
-                    <legend id="top5">
-                        Topic 5
-                    </legend>
-                    <p>
-                        Notes....
-                    </p>
-                </fieldset>
-            </div>
-        </fieldset>
-    </div>
-</body>
-
+        <script type="module" src="../scripts/NotesPage.js"></script>
+    </body>
 </html>

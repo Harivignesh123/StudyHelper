@@ -7,7 +7,6 @@ const chapterListContainerBox=document.getElementById("chapter_list_container");
 
 let subjectKey;
 
-
 const subjectTitle=document.getElementsByClassName("subject_title")[0];
 
 
@@ -47,7 +46,6 @@ else{
 }
 
 function LoadExisitngChapters(){
-    console.log(localStorage.getItem("subject_key"));
     subjectKey=localStorage.getItem("subject_key");
     dbRef=subjectKey+"/";
     subjectTitle.textContent=subjectKey.slice(subjectKey.indexOf('❤')+1);
@@ -59,9 +57,6 @@ function LoadExisitngChapters(){
 }
 
 function addChapterToUI(data){
-
-    // alert(Object.keys(data.val()).length);
-
     const divBox=document.createElement('div');
     divBox.id=data.key;
     divBox.innerHTML='<p class="chapter_name">'+(data.key).slice(data.key.indexOf('❤')+1)+'</p>';
@@ -92,11 +87,13 @@ function ChapterClicked(e){
     if(className){
          if(className=="chapter_container"){
               localStorage.setItem("chapter_key",target.id);
-              window.open("../html/ChapterPage.html","_self");
+              localStorage.setItem("subject_key",subjectKey);
+              window.open("../html/NotesPage.html","_self");
          }
          else if(className=="chapter_name"){
               localStorage.setItem("chapter_key",target.parentNode.id);
-              window.open("../html/ChapterPage.html","_self");
+              localStorage.setItem("subject_key",subjectKey);
+              window.open("../html/NotesPage.html","_self");
          }
          else{
              if(className=="chapter_add_button"){
@@ -104,8 +101,6 @@ function ChapterClicked(e){
                  const chapterNameEditText=divBox.getElementsByClassName("chapter_name_edit_text")[0];
                  const chapterName=chapterNameEditText.value;
                  
-                 divBox.innerHTML='<p class="chapter_name">'+chapterName+'</p>';
-                 divBox.className="chapter_container";
                  var key=push(ref(db,dbRef)).key+"❤"+chapterName;
      
                  var json={};
