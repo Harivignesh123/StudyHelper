@@ -1,0 +1,123 @@
+<html>
+    <head>
+        <title>Login page</title>
+        <style>
+        body{
+            background-color: azure;
+        }
+        #md
+        {
+            display: flex;
+            height: 100vh;
+            width:auto;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+         #d1
+         {
+            height: 250px;
+            width: 250px;
+            margin-left: 250px;
+            margin-top: 250px;
+            padding:10px;
+            font-family:Helvetica;
+            font-style: normal;
+            font-size: medium;
+            
+         }
+         #d3
+         {
+            height: 540px;
+            width:2px;
+            background-color: black;
+            margin-top: 150px;
+            margin-right: 30px;
+            
+         }
+         #d2
+         {
+        
+            height: 400px;
+            width: 340px;
+            margin-top: 170px;
+            margin-right:200px;    
+            padding:10px;
+            font-family:Helvetica;
+            font-style: normal;
+            font-size: medium;
+            
+
+         }
+         input{
+            font-family:Helvetica;
+            font-size: medium;
+            border:3px solid black;
+            padding: 5px;
+         }
+         #sub1,#sub2
+         {
+            background-color: lightblue;
+         }
+         #sub1:hover,#sub2:hover
+         {
+            
+            background-color: green;
+         }
+         #form1
+         {
+            padding:25px;
+            border: 3px solid black;
+         }
+         #form2
+         {
+            padding:70px;
+            border:3px solid black
+         }
+         
+        </style>
+    </head>
+    <body>
+        <div id="md">
+        <div id="d1">
+           
+            <label style="margin:65px;font-family: Helvetica;font-size:large;font-weight: bold;padding:30px">Log In</label>
+            <br><br>
+            <form id="form1" action="#" method="get">
+                <input type="email" name="Email id" id="login_email_input" placeholder="Email Id" required>
+                <br><br>
+                <input type="password" name="Email id" id="login_password_input" placeholder="Password" pattern="[A-Za-Z0-9]{8,}" required>
+                <br>
+                
+                <input  id="sub1" style="margin-left:65px;margin-top:10px;" type="submit" id="btn_login_pressed" value="Log in">
+                <br>
+                <br>
+                <br>
+                <a href="#" style="color:cornflowerblue;">Forget Password?</a>
+            </form>
+
+        </div>
+        <div id="d3"></div>
+        <div id="d2">
+            <label style="margin-left:80px;font-family: Helvetica;font-size:large;font-weight: bold;">Create a new account</label>
+            <br><br>
+            <form id="form2" action="#" method="get">
+                <input type="text" placeholder="Name" name="Name" id="create_name_input" value="" required>
+                <br>
+                <br>
+                <input type="email" placeholder="Email Id" name="Email" id="create_email_input" required>
+                <br><br>
+                <input type="password" placeholder="Password" name="Password"  id="create_password_input" required>
+                <br>
+                <br>
+                <input type="password" placeholder="Confirm Password" name="Confirm Password"  id="create_confirm_password_input" required>
+                <br>
+                <br>
+                <br>
+                <input  id="sub2" style="margin-left:65px" type="submit" id="btn_create_pressed" value="Create">
+
+            </form>
+
+        </div>
+        </div>
+    </body>
+</html>
