@@ -1,4 +1,5 @@
 import { db, ref, set, get, child, remove, update, push, onValue, onChildAdded} from "../modules/FirebaseUtils.js";
+import {notesLength,topicNameLength} from "../modules/Contract.js";
 
 let subjectTitle=document.getElementById("subject_title");
 let chapterTitle=document.getElementsByClassName("chapter_title")[0];
@@ -187,13 +188,24 @@ function NotesClicked(e){
         }
          else{
              if(className=="note_add_button"){
-                 const divBox=target.parentNode;
+                const divBox=target.parentNode;
                 
-                 const topicEditText=divBox.getElementsByClassName("topic_edit_text")[0];
-                 const topic=topicEditText.value;
+                const topicEditText=divBox.getElementsByClassName("topic_edit_text")[0];
+                const topic=topicEditText.value.trim();
+
+                if(topic.length<=0||topic.length>topicNameLength){
+                    alert("Topic Name length should be between 1 and "+topicNameLength);
+                    return;
+                }
 
                  const notesEditText=divBox.getElementsByClassName("notes_edit_text")[0];
-                 const notes=notesEditText.value;
+                 const notes=notesEditText.value.trim();
+
+                if(notes.length<=0||notes.length>notesLength){
+                    alert("Notes length should be between 1 and "+notesLength);
+                    return;
+                }
+        
 
                 
                  var key=push(ref(db,dbRef)).key+"❤"+topic;
@@ -218,6 +230,17 @@ function NotesClicked(e){
             
                 const newTitle=target.parentNode.querySelector('fieldset').querySelector('legend').querySelector(".topic_edit_text").value.trim();
                 const newNotes=target.parentNode.querySelector('fieldset').querySelector('.notes_edit_text').value.trim();
+
+                if(newTitle.length<=0||newTitle.length>topicNameLength){
+                    alert("Topic Name length should be between 1 and "+topicNameLength);
+                    return;
+                }
+
+                if(newNotes.length<=0||newNotes.length>notesLength){
+                    alert("Notes length should be between 1 and "+notesLength);
+                    return;
+                }
+
 
                 json={};
                 const newKey=target.parentNode.id.slice(0,target.parentNode.id.indexOf("❤")+1)+newTitle;
