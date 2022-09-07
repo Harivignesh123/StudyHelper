@@ -7,44 +7,50 @@
         <div id="md">
         <div id="d1">
            
-            <label style="margin:65px;font-family: Helvetica;font-size:large;font-weight: bold;padding:30px">Log In</label>
+            <label>Log In</label>
             <br><br>
-            <form id="form1" action="#" method="get">
-                <input type="email" name="Email id" id="login_email_input" placeholder="Email Id" required>
+            <div id="form1">
+                <input id="login_email_input" type="email" name="Email id" placeholder="Email Id" required>
                 <br><br>
-                <input type="password" name="Email id" id="login_password_input" placeholder="Password" pattern="[A-Za-Z0-9]{8,}" required>
-                <br>
-                
-                <input  id="sub1" style="margin-left:65px;margin-top:10px;" type="submit" id="btn_login_pressed" value="Log in">
+                <input  id="login_password_input" type="password" name="Email id" placeholder="Password" pattern="[A-Za-Z0-9]{8,}" required>
                 <br>
                 <br>
                 <br>
-                <a href="#" style="color:cornflowerblue;">Forget Password?</a>
-            </form>
+                <input id="login_account_button" type="button" value="Log in">
+                <br>
+                <br>
+                <br>
+                <a id="forgot_password_link" href="ResetPasswordPage.html" style="color:cornflowerblue;">Forgot Password?</a>
+            </div>
 
         </div>
         <div id="d3"></div>
         <div id="d2">
-            <label style="margin-left:80px;font-family: Helvetica;font-size:large;font-weight: bold;">Create a new account</label>
+            <label>Create a new account</label>
             <br><br>
-            <form id="form2" action="#" method="get">
-                <input type="text" placeholder="Name" name="Name" id="create_name_input" value="" required>
-                <br>
-                <br>
-                <input type="email" placeholder="Email Id" name="Email" id="create_email_input" required>
-                <br><br>
-                <input type="password" placeholder="Password" name="Password"  id="create_password_input" required>
-                <br>
-                <br>
-                <input type="password" placeholder="Confirm Password" name="Confirm Password"  id="create_confirm_password_input" required>
-                <br>
-                <br>
-                <br>
-                <input  id="sub2" style="margin-left:65px" type="submit" id="btn_create_pressed" value="Create">
-
-            </form>
+            <div id="form2">
+                    <!-- <input type="text" placeholder="Name" name="Name" id="create_name_input" value="" required>
+                    <br>
+                    <br> -->
+                    <input id="create_name_input" type="text" placeholder="Name" name="Name" required/>
+                    <br>
+                    <br>
+                    <input id="create_email_input" type="email" placeholder="Email Id" name="Email"required>
+                    <br>
+                    <br>
+                    <input id="create_password_input" type="password" placeholder="Password" name="Password" required>
+                    <br>
+                    <br>
+                    <input id="create_confirm_password_input"  type="password" placeholder="Confirm Password" name="Confirm Password" required>
+                    <br>
+                    <br>
+                    <br>
+                    <input id="create_account_button" type="button" value="Create">
+            </div>
 
         </div>
         </div>
+
+        <script type="module" src="../scripts/Login.js"></script>
     </body>
 </html>

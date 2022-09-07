@@ -1,0 +1,44 @@
+
+#status_bar{
+    height:100px;
+    background-color: cyan;
+    text-align: center;
+    position: relative;
+}
+#status_bar #name{
+    margin:0;
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);;
+}
+
+#subject_title{
+    border: 1px solid black;
+    text-align: center;
+}
+#topics_list_container{
+    width: 150px;
+    height:100%; 
+    float: left; 
+    border: 1px solid black;
+    margin-right:15px;
+    position: fixed;
+}
+.notes_container{
+    margin:10px 0px 10px 160px;
+}
+
+.note_add_container{
+    margin:10px 0px 10px 160px;
+}
+
+textarea{
+    min-width: 100%;
+    min-height: 100px;
+    height: fit-content;
+}
+
+a[href="-NBMYIDiMAoNrPjQq-rX❤saa"]{
+    color:red;
+}

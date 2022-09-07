@@ -1,12 +1,52 @@
+#status_bar{
+    height:100px;
+    background-color: cyan;
+    text-align: center;
+    position: relative;
+}
+#status_bar #name{
+    margin:0;
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+}
+
+
+#add_chapter_button{
+    margin:20px 10px;
+}
 .chapter_add_button{
     background-color: red;
+    margin: 5px;
 }
 .chapter_container{
     background-color: lightblue;
+    height:100px;
+    margin-bottom:15px;
+    position: relative;
 }
+
+.chapter_name{
+    margin: 0;
+    margin-left:10px;  
+    color:red;
+    font-size: 30px;
+    top: 50%;
+    transform:translateY(-50%);
+    position: absolute;
+}
+
 .chapter_add_container{
     background-color: lightcoral;
+    height:100px;
+    position: relative;
 }
-.chapter_name{
-    color:red;
+
+.chapter_add_container2{
+    margin:0;
+    position: absolute;
+    top:50%;
+    transform:translateY(-50%);
+    margin-right:10px;
 }

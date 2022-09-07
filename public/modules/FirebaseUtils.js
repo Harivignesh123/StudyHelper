@@ -1,6 +1,7 @@
 //changes made checked
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.2/firebase-app.js";
-import { getDatabase, ref, set, update, push, onValue,onChildAdded} from "https://www.gstatic.com/firebasejs/9.9.2/firebase-database.js";
+import { getDatabase, ref, set, get, update, push, onValue, child, onChildAdded,onChildChanged, onChildRemoved, remove} from "https://www.gstatic.com/firebasejs/9.9.2/firebase-database.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, updateProfile} from "https://www.gstatic.com/firebasejs/9.9.2/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCeFBXxvNWBLjPhqhfuER6r4SrQ0lBMAvk",
@@ -13,12 +14,13 @@ const firebaseConfig = {
   databaseURL: "https://studyhelper-acc4f-default-rtdb.asia-southeast1.firebasedatabase.app"
 };
 
-
 const app = initializeApp(firebaseConfig);
 
 const db=getDatabase(app);
+const auth=getAuth(app);
 
-export{db, ref,set, push, update, onValue, onChildAdded};
+
+export{db, ref,set,get, push, update, onValue, child, onChildAdded, onChildChanged, onChildRemoved, remove, auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, updateProfile};
 
 
 
