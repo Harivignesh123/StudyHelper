@@ -21,9 +21,23 @@ body {
 }
 
 #subject_title{
-    border: 1px solid black;
+    color: white;
+    font-size: 30px;
+
+    position: absolute;
+    margin: 0;
+    top: 50%;
+    left: 50%;
+    transform:translate(-50%,-50%);
+
+}
+
+#chapter_title{
+    color: #004d40;
+    font-size: 30px;
     text-align: center;
 }
+
 #topics_list_container{
     width: 150px;
     height:100%; 
@@ -32,13 +46,44 @@ body {
     margin-right:15px;
     position: fixed;
 }
+
+
+#topics_list_container li{
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+
+
 .notes_container{
     margin:10px 0px 10px 160px;
+}
+
+.notes_container fieldset{
+    background-color: white;
+}
+
+.notes_container fieldset legend{
+    background-color: white;
+    padding: 3px 10px 3px 5px;
+    font-size: 35px;
+    color: #004d40;
+    border-radius: 50px;
+}
+
+.notes_container fieldset p{
+    font-size: 25px;
+    color: black;
 }
 
 .note_add_container{
     margin:10px 0px 10px 160px;
 }
+
+.note_add_container fieldset{
+    background-color: #00695c;
+}
+
 
 textarea{
     min-width: 100%;

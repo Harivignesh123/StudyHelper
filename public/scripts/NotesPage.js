@@ -2,7 +2,7 @@ import { db, ref, set, get, child, remove, update, push, onValue, onChildAdded} 
 import {notesLength,topicNameLength} from "../modules/Contract.js";
 
 let subjectTitle=document.getElementById("subject_title");
-let chapterTitle=document.getElementsByClassName("chapter_title")[0];
+let chapterTitle=document.getElementById("chapter_title");
 let addTopicButton=document.getElementsByClassName("add_topic")[0];
 
 let notesListContainerBox=document.getElementById("notes_list_container");
