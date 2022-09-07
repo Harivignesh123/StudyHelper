@@ -1,16 +1,23 @@
+body {
+    background-color:#80cbc4;
+}
 
 #status_bar{
-    height:100px;
-    background-color: cyan;
-    text-align: center;
+    height:70px;
+    width: 100%;
+    background-color: #004d40;
     position: relative;
+    text-align: center;
 }
 #status_bar #name{
     margin:0;
     position: absolute;
     top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);;
+    left:99%;
+    transform:translate(-100%,-50%);
+    text-decoration: none;
+    color: white;
+    font-size:20px;
 }
 
 #subject_title{
@@ -39,6 +46,3 @@ textarea{
     height: fit-content;
 }
 
-a[href="-NBMYIDiMAoNrPjQq-rX❤saa"]{
-    color:red;
-}
