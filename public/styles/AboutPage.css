@@ -1,0 +1,27 @@
+body{
+    background-color:#80cbc4;
+}
+
+#img_1{
+    border-radius:40%;
+}
+#img_1,#id_1{
+    float:left;
+}
+.index{
+    width:auto;
+    height:200;
+    border:5px;
+    padding:10px;
+    margin:20px;
+    background-color:rgb(67, 67, 184);
+    color:aliceblue;
+
+}
+#img_1,#p_1{
+    align-items: center;
+}
+h1{
+    text-align: center;
+    color:brown;
+}
