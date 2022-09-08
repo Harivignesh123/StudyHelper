@@ -198,6 +198,11 @@ function NotesClicked(e){
                     return;
                 }
 
+                if(topic.includes("❤")){
+                    alert("Topic Name cannot contain ❤");
+                    return;
+                }
+
                  const notesEditText=divBox.getElementsByClassName("notes_edit_text")[0];
                  const notes=notesEditText.value.trim();
 
@@ -233,6 +238,11 @@ function NotesClicked(e){
 
                 if(newTitle.length<=0||newTitle.length>topicNameLength){
                     alert("Topic Name length should be between 1 and "+topicNameLength);
+                    return;
+                }
+
+                if(newTitle.includes("❤")){
+                    alert("Topic Name cannot contain ❤");
                     return;
                 }
 
