@@ -129,6 +129,11 @@ function SubjectClicked(e){
                     alert("Subject Name length should be between 1 and "+subjectNameLength);
                     return;
                 }
+
+                if(subjectName.includes("❤")){
+                    alert("Subject Name cannot contain ❤");
+                    return;
+                }
         
                 
                 divBox.innerHTML='<p class="subject_name">'+subjectName+'</p>';
@@ -162,6 +167,10 @@ function SubjectClicked(e){
                     return;
                 }
                 
+                if(newName.includes("❤")){
+                    alert("Subject Name cannot contain ❤");
+                    return;
+                }
             
                 get(child(ref(db),dbRef+editClickedDivBox.id+"/")).then((data)=>{
                     const content=data.val();

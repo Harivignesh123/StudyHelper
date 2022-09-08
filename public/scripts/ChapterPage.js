@@ -170,6 +170,11 @@ function ChapterClicked(e){
                     alert("Chapter Name length should be between 1 and "+chapterNameLength);
                     return;
                 }
+
+                if(chapterName.includes("❤")){
+                    alert("Chapter Name cannot contain ❤");
+                    return;
+                }
                 
                 var key=push(ref(db,dbRef)).key+"❤"+chapterName;
     
@@ -198,6 +203,11 @@ function ChapterClicked(e){
 
                 if(newName.length<=0||newName.length>chapterNameLength){
                     alert("Chapter Name length should be between 1 and "+chapterNameLength);
+                    return;
+                }
+
+                if(newName.includes("❤")){
+                    alert("Chapter Name cannot contain ❤");
                     return;
                 }
                 
