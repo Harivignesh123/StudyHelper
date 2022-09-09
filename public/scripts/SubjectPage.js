@@ -135,7 +135,6 @@ function SubjectClicked(e){
                     return;
                 }
         
-                
                 divBox.innerHTML='<p class="subject_name">'+subjectName+'</p>';
                 divBox.className="subject_container";
                 var key=push(ref(db,dbRef)).key+"❤"+subjectName;
@@ -203,10 +202,7 @@ function SubjectClicked(e){
 }
 
 function addSubjectToUI(data){
-
-    // alert(Object.keys(data.val()).length);
-
-
+    
     const divBox=document.createElement('div');
     divBox.id=data.key;
     divBox.innerHTML='<p class="subject_name">'+(data.key).slice(data.key.indexOf('❤')+1)+'</p>';

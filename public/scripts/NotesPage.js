@@ -1,7 +1,7 @@
 import { db, ref, set, get, child, remove, update, push, onValue, onChildAdded} from "../modules/FirebaseUtils.js";
 import {notesLength,topicNameLength} from "../modules/Contract.js";
 
-let subjectTitle=document.getElementById("subject_title");
+let subjectTitle=document.getElementsByClassName("subject_title")[0];
 let chapterTitle=document.getElementById("chapter_title");
 let addTopicButton=document.getElementsByClassName("add_topic")[0];
 
