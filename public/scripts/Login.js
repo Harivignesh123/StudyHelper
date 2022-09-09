@@ -103,8 +103,6 @@ function CreateAccount(){
           }, function(error) {
             console.log(error.code+":"+error.message);
           });;
-        
-
       })
       .catch((error) => {
         const errorCode = error.code;
