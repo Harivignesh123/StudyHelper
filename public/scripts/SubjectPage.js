@@ -90,20 +90,18 @@ function SubjectClicked(e){
              window.open("../html/ChapterPage.html","_self");
         }
         else if(className=="edit_button"){
-            const parent=target.parentNode.parentNode;
-            editClickedDivBox=parent;
-        
+
+            const divTag=target.parentNode.parentNode;   
+            divTag.className="subject_add_container";
             
-            const formHTML='<input class="subject_name_edit_text" type="text" placeholder="Enter subject name" value="'+parent.querySelector('p').innerHTML+'" autofocus/>&nbsp;&nbsp;<input class="edit_save_button" type="button" value="Save"/>&nbsp;&nbsp;<input class="edit_cancel_button" type="button" value="Cancel"/>';
+            const formHTML='<input class="subject_name_edit_text" type="text" placeholder="Enter subject name" value="'+divTag.querySelector('p').innerHTML+'" autofocus/>&nbsp;&nbsp;<input class="edit_save_button" type="button" value="Save"/>&nbsp;&nbsp;<input class="edit_cancel_button" type="button" value="Cancel"/>';
             const div2Tag=document.createElement('div');
             div2Tag.className="subject_add_container2";
             div2Tag.innerHTML=formHTML;
 
-            const divTag=document.createElement('div');
+            divTag.innerHTML="";
             divTag.append(div2Tag);
-            divTag.className="subject_add_container";
-            subjectListContainerBox.insertBefore(divTag,parent);
-            subjectListContainerBox.removeChild(parent);
+            
             divTag.querySelector(".subject_name_edit_text").focus();
             
         }
@@ -142,9 +140,7 @@ function SubjectClicked(e){
                 json[key]=0;
                 
                 addSubjectButton.style.visibility="visible";
-                // subjectListContainerBox.removeChild(divBox);
                 update(ref(db,dbRef),json).then(()=>{
-                    // addSubjectToUIManually(key,0,null);
                     divBox.id=key;
                     divBox.className="subject_container";
                     divBox.innerHTML='<p class="subject_name">'+subjectName+'</p>';
@@ -152,7 +148,6 @@ function SubjectClicked(e){
                     const editDivBox=document.createElement('div');
                     editDivBox.innerHTML='<input class="edit_button" type="button" value="Edit"/><br><input class="delete_button" type="button" value="Delete"/>';
                     divBox.append(editDivBox);
-
                     
                 });
                 
@@ -201,9 +196,14 @@ function SubjectClicked(e){
                 
             }
             else if(className=="edit_cancel_button"){
-                const parent=target.parentNode.parentNode;
-                subjectListContainerBox.insertBefore(editClickedDivBox,parent);
-                subjectListContainerBox.removeChild(parent);
+                const divTag=target.parentNode.parentNode;
+                
+                divTag.innerHTML='<p class="subject_name">'+(divTag.id).slice(divTag.id.indexOf('❤')+1)+'</p>';
+                divTag.className="subject_container";
+
+                const editDivBox=document.createElement('div');
+                editDivBox.innerHTML='<input class="edit_button" type="button" value="Edit"/><br><input class="delete_button" type="button" value="Delete"/>';
+                divTag.append(editDivBox);
             }
         }
    }
