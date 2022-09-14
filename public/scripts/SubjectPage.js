@@ -135,17 +135,25 @@ function SubjectClicked(e){
                     return;
                 }
         
-                divBox.innerHTML='<p class="subject_name">'+subjectName+'</p>';
-                divBox.className="subject_container";
+                
                 var key=push(ref(db,dbRef)).key+"❤"+subjectName;
     
                 var json={};
                 json[key]=0;
                 
                 addSubjectButton.style.visibility="visible";
-                subjectListContainerBox.removeChild(divBox);
+                // subjectListContainerBox.removeChild(divBox);
                 update(ref(db,dbRef),json).then(()=>{
-                    addSubjectToUIManually(key,0,null);
+                    // addSubjectToUIManually(key,0,null);
+                    divBox.id=key;
+                    divBox.className="subject_container";
+                    divBox.innerHTML='<p class="subject_name">'+subjectName+'</p>';
+
+                    const editDivBox=document.createElement('div');
+                    editDivBox.innerHTML='<input class="edit_button" type="button" value="Edit"/><br><input class="delete_button" type="button" value="Delete"/>';
+                    divBox.append(editDivBox);
+
+                    
                 });
                 
             }

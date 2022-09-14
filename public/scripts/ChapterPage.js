@@ -132,8 +132,11 @@ function ChapterClicked(e){
             window.open("../html/NotesPage.html","_self");
         }
         else if(className=="edit_button"){
-            const parent=target.parentNode.parentNode;
-            editClickedDivBox=parent;            
+            const divBox=target.parentNode.parentNode;
+            editClickedDivBox=parent;   
+            
+           
+        
             
             const formHTML='<input class="chapter_name_edit_text" type="text" placeholder="Enter chapter name" value="'+parent.querySelector('p').innerHTML+'" autofocus/>&nbsp;&nbsp;<input class="edit_save_button" type="button" value="Save"/>&nbsp;&nbsp;<input class="edit_cancel_button" type="button" value="Cancel"/>';
             const div2Tag=document.createElement('div');
@@ -182,9 +185,15 @@ function ChapterClicked(e){
                 json[key]=0;
                 
                 addChapterButton.style.visibility="visible";
-                chapterListContainerBox.removeChild(divBox);
                 update(ref(db,dbRef),json).then(()=>{
-                    addChapterToUIManually(key,0,null);
+
+                    divBox.id=key;
+                    divBox.innerHTML='<p class="chapter_name">'+chapterName+'</p>';
+                    divBox.className="chapter_container";
+
+                    const editDivBox=document.createElement('div');
+                    editDivBox.innerHTML='<input class="edit_button" type="button" value="Edit"/><br><input class="delete_button" type="button" value="Delete"/>';
+                    divBox.append(editDivBox);
                 });
 
                 
