@@ -7,7 +7,6 @@ const subjectListContainerBox=document.getElementById("subject_list_container");
 
 let user_uid;
 let dbRef;
-let editClickedDivBox;
 
 if(document.addEventListener){
     document.addEventListener("DOMContentLoaded",function(){
@@ -160,8 +159,9 @@ function SubjectClicked(e){
                 addSubjectButton.style.visibility="visible";
             }
             else if(className=="edit_save_button"){
-                const newName=target.parentNode.parentNode.querySelector('.subject_name_edit_text').value.trim();
-                const newKey=editClickedDivBox.id.slice(0,editClickedDivBox.id.indexOf('❤')+1)+newName;
+                const divTag=target.parentNode.parentNode;
+                const newName=divTag.querySelector('.subject_name_edit_text').value.trim();
+                const newKey=divTag.id.slice(0,divTag.id.indexOf('❤')+1)+newName;
 
                 
                 if(newName.length<=0||newName.length>subjectNameLength){
@@ -173,24 +173,45 @@ function SubjectClicked(e){
                     alert("Subject Name cannot contain ❤");
                     return;
                 }
-            
-                get(child(ref(db),dbRef+editClickedDivBox.id+"/")).then((data)=>{
+
+                if(newKey==divTag.id){
+                    divTag.innerHTML='<p class="subject_name">'+newName+'</p>';
+                    divTag.className="subject_container";
+
+                    const editDivBox=document.createElement('div');
+                    editDivBox.innerHTML='<input class="edit_button" type="button" value="Edit"/><br><input class="delete_button" type="button" value="Delete"/>';
+                    divTag.append(editDivBox);
+                    return;
+                }
+
+                
+                get(child(ref(db),dbRef+divTag.id+"/")).then((data)=>{
                     const content=data.val();
                     var json={};
                     json[newKey]=content;
-            
+                    
                     update(ref(db,dbRef),json)
                         .then(()=>{
-                            remove(ref(db,dbRef+editClickedDivBox.id)).then(()=>{
-                                console.log(editClickedDivBox.id+" Deleted");
-                                const parent=target.parentNode.parentNode;
-                                addSubjectToUIManually(newKey,1,parent);
-                                subjectListContainerBox.removeChild(parent);
+                            remove(ref(db,dbRef+divTag.id)).then(()=>{
+                                console.log(divTag.id+" Deleted");
+
+                                divTag.id=newKey;
+                                divTag.innerHTML='<p class="subject_name">'+newName+'</p>';
+                                divTag.className="subject_container";
+
+                                const editDivBox=document.createElement('div');
+                                editDivBox.innerHTML='<input class="edit_button" type="button" value="Edit"/><br><input class="delete_button" type="button" value="Delete"/>';
+                                divTag.append(editDivBox);
+
                             })
                             .catch((error)=>{
-                                console.log("Problem with deleting "+parent.id+" "+error.code+":"+error.message);
+                                console.log("Problem with deleting "+divTag.id+" "+error.code+":"+error.message);
                             });
+                        
+                        }).catch((error)=>{
+                            console.log("Problem with updating "+newKey+" "+error.code+" "+error.message);
                         });
+                        
                 });
                 
                 
@@ -221,26 +242,6 @@ function addSubjectToUI(data){
     divBox.append(editDivBox);
     
     subjectListContainerBox.appendChild(divBox);
-}
-
-function addSubjectToUIManually(id,mode,before){
-    const divBox=document.createElement('div');
-    divBox.id=id;
-
-    divBox.innerHTML='<p class="subject_name">'+id.slice(id.indexOf('❤')+1)+'</p>';
-    divBox.className="subject_container";
-
-    const editDivBox=document.createElement('div');
-    editDivBox.innerHTML='<input class="edit_button" type="button" value="Edit"/><br><input class="delete_button" type="button" value="Delete"/>';
-    divBox.append(editDivBox);
-    
-    if(mode==0){
-        subjectListContainerBox.appendChild(divBox);
-    }
-    else{
-        subjectListContainerBox.insertBefore(divBox,before);
-    }
-    
 }
 
 function getEventTarget(e){

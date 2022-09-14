@@ -10,7 +10,7 @@ const chapterListContainerBox=document.getElementById("chapter_list_container");
 let subjectKey;
 
 const subjectTitle=document.getElementsByClassName("subject_title")[0];
-let editClickedDivBox;
+
 
 if(document.addEventListener){
     document.addEventListener("DOMContentLoaded",function(){
@@ -81,25 +81,6 @@ function addChapterToUI(data){
     chapterListContainerBox.appendChild(divBox);
 }
 
-function addChapterToUIManually(id,mode,before){
-    const divBox=document.createElement('div');
-    divBox.id=id;
-
-    divBox.innerHTML='<p class="chapter_name">'+id.slice(id.indexOf('❤')+1)+'</p>';
-    divBox.className="chapter_container";
-
-    const editDivBox=document.createElement('div');
-    editDivBox.innerHTML='<input class="edit_button" type="button" value="Edit"/><br><input class="delete_button" type="button" value="Delete"/>';
-    divBox.append(editDivBox);
-    
-    if(mode==0){
-        chapterListContainerBox.appendChild(divBox);
-    }
-    else{
-        chapterListContainerBox.insertBefore(divBox,before);
-    }
-    
-}
 
 function AddChapter(){
 
@@ -202,8 +183,9 @@ function ChapterClicked(e){
                 addChapterButton.style.visibility="visible";
             }
             else if(className=="edit_save_button"){
-                const newName=target.parentNode.parentNode.querySelector('.chapter_name_edit_text').value.trim();
-                const newKey=editClickedDivBox.id.slice(0,editClickedDivBox.id.indexOf('❤')+1)+newName;
+                const divTag=target.parentNode.parentNode;
+                const newName=divTag.querySelector('.chapter_name_edit_text').value.trim();
+                const newKey=divTag.id.slice(0,divTag.id.indexOf('❤')+1)+newName;
 
                 if(newName.length<=0||newName.length>chapterNameLength){
                     alert("Chapter Name length should be between 1 and "+chapterNameLength);
@@ -214,20 +196,35 @@ function ChapterClicked(e){
                     alert("Chapter Name cannot contain ❤");
                     return;
                 }
+
+                if(newKey==divTag.id){
+                    divTag.innerHTML='<p class="chapter_name">'+newName+'</p>';
+                    divTag.className="chapter_container";
+
+                    const editDivBox=document.createElement('div');
+                    editDivBox.innerHTML='<input class="edit_button" type="button" value="Edit"/><br><input class="delete_button" type="button" value="Delete"/>';
+                    divTag.append(editDivBox);
+                    return;
+                }
                 
             
-                get(child(ref(db),dbRef+editClickedDivBox.id+"/")).then((data)=>{
+                get(child(ref(db),dbRef+divTag.id+"/")).then((data)=>{
                     const content=data.val();
                     var json={};
                     json[newKey]=content;
             
                     update(ref(db,dbRef),json)
                         .then(()=>{
-                            remove(ref(db,dbRef+editClickedDivBox.id)).then(()=>{
-                                console.log(editClickedDivBox.id+" Deleted");
-                                const parent=target.parentNode.parentNode;
-                                addChapterToUIManually(newKey,1,parent);
-                                chapterListContainerBox.removeChild(parent);
+                            remove(ref(db,dbRef+divTag.id)).then(()=>{
+                                console.log(divTag.id+" Deleted");
+                                
+                                divTag.id=newKey;
+                                divTag.innerHTML='<p class="chapter_name">'+newName+'</p>';
+                                divTag.className="chapter_container";
+
+                                const editDivBox=document.createElement('div');
+                                editDivBox.innerHTML='<input class="edit_button" type="button" value="Edit"/><br><input class="delete_button" type="button" value="Delete"/>';
+                                divTag.append(editDivBox);
                             })
                             .catch((error)=>{
                                 console.log("Problem with deleting "+parent.id+" "+error.code+":"+error.message);
