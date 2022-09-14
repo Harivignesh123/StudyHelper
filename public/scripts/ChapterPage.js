@@ -132,22 +132,17 @@ function ChapterClicked(e){
             window.open("../html/NotesPage.html","_self");
         }
         else if(className=="edit_button"){
-            const divBox=target.parentNode.parentNode;
-            editClickedDivBox=parent;   
+            const divTag=target.parentNode.parentNode;   
+            divTag.className="chapter_add_container";
             
-           
-        
-            
-            const formHTML='<input class="chapter_name_edit_text" type="text" placeholder="Enter chapter name" value="'+parent.querySelector('p').innerHTML+'" autofocus/>&nbsp;&nbsp;<input class="edit_save_button" type="button" value="Save"/>&nbsp;&nbsp;<input class="edit_cancel_button" type="button" value="Cancel"/>';
+            const formHTML='<input class="chapter_name_edit_text" type="text" placeholder="Enter chapter name" value="'+divTag.querySelector('p').innerHTML+'" autofocus/>&nbsp;&nbsp;<input class="edit_save_button" type="button" value="Save"/>&nbsp;&nbsp;<input class="edit_cancel_button" type="button" value="Cancel"/>';
             const div2Tag=document.createElement('div');
             div2Tag.className="chapter_add_container2";
             div2Tag.innerHTML=formHTML;
 
-            const divTag=document.createElement('div');
+            divTag.innerHTML="";
             divTag.append(div2Tag);
-            divTag.className="chapter_add_container";
-            chapterListContainerBox.insertBefore(divTag,parent);
-            chapterListContainerBox.removeChild(parent);
+            
             divTag.querySelector(".chapter_name_edit_text").focus();
             
         }
@@ -243,9 +238,15 @@ function ChapterClicked(e){
                 
             }
             else if(className=="edit_cancel_button"){
-                const parent=target.parentNode.parentNode;
-                chapterListContainerBox.insertBefore(editClickedDivBox,parent);
-                chapterListContainerBox.removeChild(parent);
+                const divTag=target.parentNode.parentNode;
+                
+                divTag.innerHTML='<p class="chapter_name">'+(divTag.id).slice(divTag.id.indexOf('❤')+1)+'</p>';
+                divTag.className="chapter_container";
+
+                const editDivBox=document.createElement('div');
+                editDivBox.innerHTML='<input class="edit_button" type="button" value="Edit"/><br><input class="delete_button" type="button" value="Delete"/>';
+                divTag.append(editDivBox);
+
             }
          }
     }
