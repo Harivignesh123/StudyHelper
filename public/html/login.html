@@ -2,6 +2,11 @@
     <head>
         <title>Login page</title>
         <link rel="stylesheet" type="text/css" href="../styles/Login.css"/>
+
+        <script src="https://apis.google.com/js/api.js"></script>
+        
+        <script type="text/javascript" src="../modules/JSONapi.js"></script>
+
     </head>
     <body>
         <p id="title">Study Helper<br>
@@ -57,8 +62,18 @@
             </div>
         </div>
 
-        <script type="module" src="../scripts/Login.js"></script>
 
+        <script type="module" src="../scripts/Login.js"></script>
+        
+
+        <!-- <script async src="https://cse.google.com/cse.js?cx=e46634678bec7495c"></script>
+        <div class="gcse-search"></div> -->
+
+        <button onclick="loadClient()">load</button>
+        <button onclick="execute()">execute</button>
+
+        
+        
 
     </body>
 </html>
