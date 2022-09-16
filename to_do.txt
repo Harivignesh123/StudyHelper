@@ -1,2 +1,3 @@
-improve background efficiency
-
+new UI
+aws amazon polly-text to speech
+aws amazon transcribe-speech to text
