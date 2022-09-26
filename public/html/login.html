@@ -1,79 +1,82 @@
 <html>
-    <head>
-        <title>Login page</title>
-        <link rel="stylesheet" type="text/css" href="../styles/Login.css"/>
 
-        <script src="https://apis.google.com/js/api.js"></script>
-        
-        <script type="text/javascript" src="../modules/JSONapi.js"></script>
+<head>
+    <title>Login page</title>
+    <link rel="stylesheet" type="text/css" href="../styles/Login.css" />
 
-    </head>
-    <body>
-        <p id="title">Study Helper<br>
-            <a href="AboutPage.html">About us</a>
-        </p>
-        <br>
-        <br>
+    <script src="https://apis.google.com/js/api.js"></script>
 
-        <div id="md">
-            
-            <div id="d1">
-            
-                <label class="label">Log In</label>
+    <script type="text/javascript" src="../modules/JSONapi.js"></script>
+
+</head>
+
+<body>
+    <p id="title">Study Helper<br>
+        <a href="/about">About us</a>
+    </p>
+    <br>
+    <br>
+
+    <div id="md">
+
+        <div id="d1">
+
+            <label class="label">Log In</label>
+            <br><br>
+            <div id="form1">
+                <input id="login_email_input" type="email" name="Email id" placeholder="Email Id" required>
                 <br><br>
-                <div id="form1">
-                    <input id="login_email_input" type="email" name="Email id" placeholder="Email Id" required>
-                    <br><br>
-                    <input  id="login_password_input" type="password" name="Email id" placeholder="Password">
-                    <br>
-                    <br>
-                    <br>
-                    <input id="login_account_button" type="button" value="Log in">
-                    <br>
-                    <br>
-                    <br>
-                    <a id="forgot_password_link" href="ResetPasswordPage.html">Forgot Password?</a>
-                </div>
-
+                <input id="login_password_input" type="password" name="Email id" placeholder="Password">
+                <br>
+                <br>
+                <br>
+                <input id="login_account_button" type="button" value="Log in">
+                <br>
+                <br>
+                <br>
+                <a id="forgot_password_link" href="/resetpassword">Forgot Password?</a>
             </div>
-           
-            <div id="d2">
-                <div id="d3"></div>
-                <div id="create_account_container">
-                    <label class="label">Create a new account</label>
-                    <br><br>
-                    <div id="form2">
-                            <input id="create_name_input" type="text" placeholder="Name" name="Name" required/>
-                            <br>
-                            <br>
-                            <input id="create_email_input" type="email" placeholder="Email Id" name="Email"required>
-                            <br>
-                            <br>
-                            <input id="create_password_input" type="password" placeholder="Password" name="Password" required>
-                            <br>
-                            <br>
-                            <input id="create_confirm_password_input"  type="password" placeholder="Confirm Password" name="Confirm Password" required>
-                            <br>
-                            <br>
-                            <br>
-                            <input id="create_account_button" type="button" value="Create">
-                    </div>
+
+        </div>
+
+        <div id="d2">
+            <div id="d3"></div>
+            <div id="create_account_container">
+                <label class="label">Create a new account</label>
+                <br><br>
+                <div id="form2">
+                    <input id="create_name_input" type="text" placeholder="Name" name="Name" required/>
+                    <br>
+                    <br>
+                    <input id="create_email_input" type="email" placeholder="Email Id" name="Email" required>
+                    <br>
+                    <br>
+                    <input id="create_password_input" type="password" placeholder="Password" name="Password" required>
+                    <br>
+                    <br>
+                    <input id="create_confirm_password_input" type="password" placeholder="Confirm Password" name="Confirm Password" required>
+                    <br>
+                    <br>
+                    <br>
+                    <input id="create_account_button" type="button" value="Create">
                 </div>
             </div>
         </div>
+    </div>
 
 
-        <script type="module" src="../scripts/Login.js"></script>
-        
+    <script type="module" src="../scripts/Login.js"></script>
 
-        <!-- <script async src="https://cse.google.com/cse.js?cx=e46634678bec7495c"></script>
+
+    <!-- <script async src="https://cse.google.com/cse.js?cx=e46634678bec7495c"></script>
         <div class="gcse-search"></div> -->
 
-        <button onclick="loadClient()">load</button>
-        <button onclick="execute()">execute</button>
+    <button onclick="loadClient()">load</button>
+    <button onclick="execute()">execute</button>
 
-        
-        
 
-    </body>
+
+
+</body>
+
 </html>
