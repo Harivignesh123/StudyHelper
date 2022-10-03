@@ -1,5 +1,5 @@
 import { db, ref, set, get, child, remove, update, push, onValue, onChildAdded} from "../modules/FirebaseUtils.js";
-import {notesLength,topicNameLength,cons} from "../modules/Contract.js";
+import {notesLength,topicNameLength} from "../modules/Contract.js";
 import{require} from "../modules/require.js";
 
 
@@ -11,11 +11,15 @@ const addTopicButton=document.getElementsByClassName("add_topic")[0];
 const notesListContainerBox=document.getElementById("notes_list_container");
 const topicsListContainerBox=document.getElementById("topics_list_container");
 const referenceLinksContainerBox=document.getElementById("ref_links_container");
+const refLinksList=document.getElementById("ref_links_list");
 
 
 let subjectKey;
 let chapterKey;
 let user_uid;
+
+let subjectName;
+let chapterName;
 
 let dbRef;
 
@@ -29,11 +33,13 @@ document.getElementsByTagName("ul")[0].addEventListener("mouseover",function(e){
 
 if(document.addEventListener){
     document.addEventListener("DOMContentLoaded",function(){
+        loadClient();
         LoadExisitngNotes();
     },false);    
 }
 else{
     document.attachEvent("onDOMContentLoaded",function(){
+        loadClient();
         LoadExisitngNotes();
     });
 }
@@ -74,8 +80,11 @@ function LoadExisitngNotes(){
     heading.innerHTML=userName;
 
     dbRef=user_uid+"/"+subjectKey+"/"+chapterKey+"/";
-    subjectTitle.textContent=subjectKey.slice(subjectKey.indexOf('❤')+1);
-    chapterTitle.textContent=chapterKey.slice(chapterKey.indexOf('❤')+1);
+
+    subjectName=subjectKey.slice(subjectKey.indexOf('❤')+1);
+    chapterName=chapterKey.slice(chapterKey.indexOf('❤')+1);
+    subjectTitle.textContent=subjectName;
+    chapterTitle.textContent=chapterName;
 
 
     get(child(ref(db),dbRef)).then((data)=>{
@@ -92,9 +101,10 @@ function LoadExisitngNotes(){
 function addNotesToUI(data){
     const divBox=document.createElement('div');
     divBox.id=data.key;
-
-    divBox.innerHTML='<fieldset><legend class="topic_legend">'+(data.key).slice(data.key.indexOf('❤')+1)+'</legend><p>'+data.val()+'</p></fieldset>'
     divBox.className="notes_container";
+    
+    divBox.innerHTML='<fieldset><legend class="topic_legend">'+(data.key).slice(data.key.indexOf('❤')+1)+'</legend><p>'+data.val()+'</p></fieldset>'
+    
 
     const editDivBox=document.createElement('div');
     editDivBox.innerHTML='<input class="edit_button" type="button" value="Edit"/><br><input class="delete_button" type="button" value="Delete"/>';
@@ -318,17 +328,36 @@ function NotesClicked(e){
     // }
 
     if(target.className=="topic_legend"){
-        id=target.innerHTML;
+       refLinksList.innerHTML="";
         
-        var topic="microprocessor";
-        
-
+        const topic=subjectName+" "+chapterName+" "+target.innerHTML;
+        console.log(topic);
+        execute(topic);
     }
 
-
-
-
  }
+
+ function execute(searchKey) {
+    return gapi.client.search.cse.list({
+    "cx": "e46634678bec7495c",
+    "exactTerms": searchKey
+    })
+        .then(function(response) {
+            
+            response.result.items.forEach(item => {
+                // console.log(item.link+"\n");
+
+                const liTag=document.createElement("li");
+                liTag.innerHTML="<a href="+item.link+" target=\"_blank\">"+item.link+"</a>"
+                refLinksList.appendChild(liTag);
+            });
+           
+        
+        },
+        function(err) { 
+            console.error("Execute error", err); 
+        });
+}
 
  
 function getEventTarget(e){
