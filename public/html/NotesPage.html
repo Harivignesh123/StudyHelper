@@ -2,6 +2,10 @@
     <head>
         <title>Notes Page</title>
         <link rel="stylesheet" type="text/css" href="../styles/NotesPage.css"/>
+    
+        <script src="https://apis.google.com/js/api.js"></script>
+        <script type="text/javascript" src="../modules/JSONapi.js"></script>
+
     </head>
 
     <body>
@@ -13,19 +17,32 @@
             </div>
         </div>
         <h2 id="chapter_title">Chapter name</h2>
-        <div id="topics_list_container">
-            <input type="button" class="add_topic" value="add"></button>
-            <ul>
-            
-            </ul>
-        </div>
-        <div>
+<!-------------------------------------------------------------->
+        <button onclick="loadClient()">load</button>
+        <button onclick="execute()">execute</button>
+<!-------------------------------------------------------------->
+        <div id="parent_container">
+            <div id="topics_list_container">
+                <input type="button" class="add_topic" value="add"></button>
+                <ul>
+                
+                </ul>
+            </div>
+        
             <div id="notes_list_container">
-
+                
+            </div>
+        
+            <div id="ref_links_container">
+                
             </div>
         </div>
+        
 
         <script type="module" src="../scripts/NotesPage.js"></script>
+
+        
+    
         
     </body>
 </html>

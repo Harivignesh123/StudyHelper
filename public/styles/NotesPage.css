@@ -52,25 +52,36 @@ body {
     text-align: center;
 }
 
+
+#parent_container{
+    width: 100%;
+    height: 100%;
+    display:flex;
+    flex-direction:row;
+}
+
 #topics_list_container{
     width: 150px;
     height:100%; 
-    float: left; 
     border: 1px solid black;
-    margin-right:15px;
-    position: fixed;
+    margin-right:10px;
+    flex:1;
 }
 
 
 #topics_list_container li{
     font-size: 20px;
     margin-bottom: 10px;
+
+   
 }
 
-
+#notes_list_container{
+    flex:4;
+}
 
 .notes_container{
-    margin:10px 0px 10px 160px;
+    margin:10px 0px 10px 0px;
 }
 
 .notes_container fieldset{
@@ -91,11 +102,19 @@ body {
 }
 
 .note_add_container{
-    margin:10px 0px 10px 160px;
+    margin:10px 0px 10px 0px;
 }
 
 .note_add_container fieldset{
     background-color: #00695c;
+}
+
+#ref_links_container{
+    background-color: blanchedalmond;
+    height: 100%;
+    width: 100%;
+    flex:2;
+    margin: 0px 10px 0px 10px;
 }
 
 

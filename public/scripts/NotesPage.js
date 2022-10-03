@@ -1,12 +1,17 @@
 import { db, ref, set, get, child, remove, update, push, onValue, onChildAdded} from "../modules/FirebaseUtils.js";
-import {notesLength,topicNameLength} from "../modules/Contract.js";
+import {notesLength,topicNameLength,cons} from "../modules/Contract.js";
+import{require} from "../modules/require.js";
 
-let subjectTitle=document.getElementsByClassName("subject_title")[0];
-let chapterTitle=document.getElementById("chapter_title");
-let addTopicButton=document.getElementsByClassName("add_topic")[0];
 
-let notesListContainerBox=document.getElementById("notes_list_container");
-let topicsListContainerBox=document.getElementById("topics_list_container");
+
+const subjectTitle=document.getElementsByClassName("subject_title")[0];
+const chapterTitle=document.getElementById("chapter_title");
+const addTopicButton=document.getElementsByClassName("add_topic")[0];
+
+const notesListContainerBox=document.getElementById("notes_list_container");
+const topicsListContainerBox=document.getElementById("topics_list_container");
+const referenceLinksContainerBox=document.getElementById("ref_links_container");
+
 
 let subjectKey;
 let chapterKey;
@@ -48,6 +53,9 @@ if(notesListContainerBox.addEventListener){
     notesListContainerBox.addEventListener("click",function(e){
         NotesClicked(e);
     },false);
+    notesListContainerBox.addEventListener("mouseover",function(e){
+        NotesHovered(e);
+    },false);
 }
 else{
     notesListContainerBox.attachEvent("onclick",function(e){
@@ -85,7 +93,7 @@ function addNotesToUI(data){
     const divBox=document.createElement('div');
     divBox.id=data.key;
 
-    divBox.innerHTML='<fieldset><legend>'+(data.key).slice(data.key.indexOf('❤')+1)+'</legend><p>'+data.val()+'</p></fieldset>'
+    divBox.innerHTML='<fieldset><legend class="topic_legend">'+(data.key).slice(data.key.indexOf('❤')+1)+'</legend><p>'+data.val()+'</p></fieldset>'
     divBox.className="notes_container";
 
     const editDivBox=document.createElement('div');
@@ -105,7 +113,7 @@ function addNotesToUIManually(id,notes,mode,before){
     const divBox=document.createElement('div');
     divBox.id=id;
 
-    divBox.innerHTML='<fieldset><legend>'+(id).slice(id.indexOf('❤')+1)+'</legend><p>'+notes+'</p></fieldset>'
+    divBox.innerHTML='<fieldset><legend class="topic_legend">'+(id).slice(id.indexOf('❤')+1)+'</legend><p>'+notes+'</p></fieldset>'
     divBox.className="notes_container";
 
     const editDivBox=document.createElement('div');
@@ -293,6 +301,33 @@ function NotesClicked(e){
             }
          }
     }
+ }
+
+ function NotesHovered(e){
+    const target=getEventTarget(e);
+    // if(target.tagName){
+    //     if(target.class=="notes_container"){
+    //         id=target.id;
+    //     }
+    //     if(target.parentNode.class=="notes_container"){
+    //         id=target.parentNode.id;
+    //     }
+    //     if(target.parentNode.parentNode.class=="notes_container"){
+    //         id=target.parentNode.parentNode.parentNode.id;
+    //     }    
+    // }
+
+    if(target.className=="topic_legend"){
+        id=target.innerHTML;
+        
+        var topic="microprocessor";
+        
+
+    }
+
+
+
+
  }
 
  
