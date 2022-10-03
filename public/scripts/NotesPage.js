@@ -1,6 +1,6 @@
 import { db, ref, set, get, child, remove, update, push, onValue, onChildAdded} from "../modules/FirebaseUtils.js";
 import {notesLength,topicNameLength} from "../modules/Contract.js";
-import{require} from "../modules/require.js";
+import {textToSpeak} from "../modules/VoiceManager.js";
 
 
 
@@ -102,8 +102,9 @@ function addNotesToUI(data){
     const divBox=document.createElement('div');
     divBox.id=data.key;
     divBox.className="notes_container";
-    
-    divBox.innerHTML='<fieldset><legend class="topic_legend">'+(data.key).slice(data.key.indexOf('❤')+1)+'</legend><p>'+data.val()+'</p></fieldset>'
+
+    const speakButton="<input type=\"button\" class=\"speak_button\" value=\"speak\"/><br>";
+    divBox.innerHTML='<fieldset><legend class="topic_legend">'+(data.key).slice(data.key.indexOf('❤')+1)+'</legend>'+speakButton+'<p>'+data.val()+'</p></fieldset>'
     
 
     const editDivBox=document.createElement('div');
@@ -123,7 +124,9 @@ function addNotesToUIManually(id,notes,mode,before){
     const divBox=document.createElement('div');
     divBox.id=id;
 
-    divBox.innerHTML='<fieldset><legend class="topic_legend">'+(id).slice(id.indexOf('❤')+1)+'</legend><p>'+notes+'</p></fieldset>'
+    const speakButton="<input type=\"button\" class=\"speak_button\" value=\"speak\"/><br>";
+
+    divBox.innerHTML='<fieldset><legend class="topic_legend">'+(id).slice(id.indexOf('❤')+1)+'</legend>'+speakButton+'<p>'+notes+'</p></fieldset>'
     divBox.className="notes_container";
 
     const editDivBox=document.createElement('div');
@@ -174,6 +177,10 @@ function NotesClicked(e){
             //   localStorage.setItem("chapter_key",target.parentNode.id);
             //   localStorage.setItem("subject_key",subjectKey);
             //   window.open("../html/NotesPage.html","_self");
+         }
+         else if(className=="speak_button"){
+            const content=target.parentNode.querySelector("p").innerHTML;
+            textToSpeak(content);
          }
          else if(className=="edit_button"){
 
@@ -280,7 +287,8 @@ function NotesClicked(e){
                     update(ref(db,dbRef),json).then(()=>{
                         const parent=target.parentNode;
                         parent.id=newKey;
-                        parent.innerHTML='<fieldset><legend>'+newTitle+'</legend><p>'+newNotes+'</p></fieldset>'
+                        const speakButton="<input type=\"button\" class=\"speak_button\" value=\"speak\"/><br>";
+                        parent.innerHTML='<fieldset><legend>'+newTitle+'</legend>'+speakButton+'<p>'+newNotes+'</p></fieldset>'
 
                         const listItem=topicsListContainerBox.querySelector('ul').querySelector("#"+oldKey);
                         listItem.id=newKey;
@@ -345,8 +353,7 @@ function NotesClicked(e){
         .then(function(response) {
             
             response.result.items.forEach(item => {
-                // console.log(item.link+"\n");
-
+                console.log(item.link+"\n");
                 const liTag=document.createElement("li");
                 liTag.innerHTML="<a href="+item.link+" target=\"_blank\">"+item.link+"</a>"
                 refLinksList.appendChild(liTag);
