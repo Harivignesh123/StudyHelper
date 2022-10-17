@@ -9,13 +9,14 @@ body {
 }
 
 body {
-    background-color: #80cbc4;
+    background: url("../res/images/Background.jpg")10%/ cover;
 }
 
 #CenterAllign {
     max-width: 700px;
     margin: auto;
-    background: rgb(45, 168, 117);
+    background-color: rgba(0, 0, 0, 0.61);
+    backdrop-filter: blur(5px);
     padding: 10px;
     border-radius: 20px;
 }
@@ -41,10 +42,13 @@ input[type="button"]:active {
 #status_bar {
     height: 70px;
     width: 100%;
-    background-color: #004d40;
+    background-color: rgba(0, 0, 0, 0.71);
+    backdrop-filter: blur(20px);
     display: flex;
     justify-content: right;
     align-items: center;
+    margin-bottom: 10px;
+    border-radius: 20px;
 }
 
 #status_bar #MainPage {
