@@ -231,6 +231,7 @@ function addSubjectToUI(data) {
 
     const editDivBox = document.createElement('div');
     editDivBox.innerHTML = '<input class="edit_button" type="button" value="Edit"/><br><input class="delete_button" type="button" value="Delete"/>';
+    editDivBox.setAttribute("class", "editbutn");
     divBox.append(editDivBox);
 
     subjectListContainerBox.appendChild(divBox);

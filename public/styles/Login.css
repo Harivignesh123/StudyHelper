@@ -4,54 +4,51 @@ cyan:#00695c
 dark-cyan:#004d40
 */
 
-html,body
-{
+html,
+body {
     width: 100%;
     height: 100%;
     margin: 0px;
     padding: 0px;
-    overflow-x: hidden; 
+    overflow-x: hidden;
 }
 
-
-body {   
+body {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    flex-wrap:wrap;
-    background:radial-gradient(ellipse,#80cbc4 60%,white);
-
+    flex-wrap: wrap;
+    background: radial-gradient(ellipse, #80cbc4 60%, white);
 }
 
-#title{
+#title {
     height: fit-content;
     width: fit-content;
-    color:#004d40;
+    color: #004d40;
     font-size: 70px;
     text-align: right;
     margin: 50px;
 }
-#title a{
+
+#title a {
     color: red;
     font-size: 15px;
 }
 
-
 #md {
     margin: 0;
-    display:flex;
-    height:fit-content;
+    display: flex;
+    height: fit-content;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     align-self: center;
     flex-direction: row;
-    
 }
 
 #d1 {
-    height:fit-content;
+    height: fit-content;
     width: fit-content;
     padding: 10px;
     font-family: Helvetica;
@@ -59,9 +56,7 @@ body {
     font-size: medium;
     text-align: center;
     margin: 10px 0px;
-
 }
-
 
 #d2 {
     height: fit-content;
@@ -73,17 +68,16 @@ body {
     text-align: center;
     display: flex;
     margin: 10px 0px;
-
 }
 
 #d3 {
     width: 2px;
-    background-color:#004d40;
-    margin:0px 120px 0px 100px;
+    background-color: #004d40;
+    margin: 0px 120px 0px 100px;
     align-self: stretch;
 }
 
-#create_account_container{
+#create_account_container {
     margin: 20px 0px;
 }
 
@@ -96,23 +90,27 @@ input {
     border-radius: 10px;
 }
 
-
-
 input:hover {
     transform: scale(1.05);
 }
 
-input[type="button"]{
+input[type="button"] {
     background-color: #00695c;
     color: white;
     transition: 0.2s transform;
+    border-radius: 15px;
+    cursor: pointer;
+    box-shadow: 0 3px #999;
 }
 
-input[type="button"]:hover{
+input[type="button"]:hover {
     transform: scale(1.2);
 }
 
-
+input[type="button"]:active {
+    box-shadow: 0 2px #666;
+    transform: translateY(4px);
+}
 
 #sub1,
 #sub2 {
@@ -124,21 +122,20 @@ input[type="button"]:hover{
     background-color: green;
 }
 
-.label{
+.label {
     font-family: Helvetica;
     font-size: 25px;
     font-weight: bold;
-    color:#004d40;
+    color: #004d40;
 }
 
-#form1,#form2{
+#form1,
+#form2 {
     border-radius: 20px;
     padding: 40px;
     border: 3px solid #004d40;
 }
 
-
-#forgot_password_link{
+#forgot_password_link {
     color: red;
 }
-
