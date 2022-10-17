@@ -351,14 +351,17 @@ function NotesClicked(e){
     "exactTerms": searchKey
     })
         .then(function(response) {
-            
-            response.result.items.forEach(item => {
-                console.log(item.link+"\n");
-                const liTag=document.createElement("li");
-                liTag.innerHTML="<a href="+item.link+" target=\"_blank\">"+item.link+"</a>"
-                refLinksList.appendChild(liTag);
-            });
-           
+            if(response.result.items!=null){
+                response.result.items.forEach(item => {
+                        console.log(item.link+"\n");
+                        const liTag=document.createElement("li");
+                        liTag.innerHTML="<a href="+item.link+" target=\"_blank\">"+item.link+"</a>"
+                        refLinksList.appendChild(liTag);
+                    });
+            } 
+            else{
+                refLinksList.innerHTML="<h1>No related references found<h1>"
+            }  
         
         },
         function(err) { 
