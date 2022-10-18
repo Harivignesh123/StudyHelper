@@ -43,14 +43,14 @@ body {
 }
 
 #status_bar .subject_title {
-    color: white;
+    color: rgb(98, 98, 98);
     font-size: 30px;
     width: 100%;
     text-align: center;
 }
 
 #chapter_title {
-    color: #004d40;
+    color: rgb(68, 76, 100);
     font-size: 30px;
     text-align: center;
 }
@@ -80,6 +80,11 @@ body {
 
 #notes_list_container {
     flex: 4;
+    background-color: rgba(0, 0, 0, 0.71);
+    backdrop-filter: blur(20px);
+    color: whitesmoke;
+    border: 2px solid whitesmoke;
+    border-radius: 20px;
 }
 
 .notes_container {
@@ -87,7 +92,9 @@ body {
 }
 
 .notes_container fieldset {
-    background-color: white;
+    background-color: rgba(0, 0, 0, 0.71);
+    backdrop-filter: blur(40px);
+    color: whitesmoke;
 }
 
 .notes_container fieldset legend {
@@ -100,7 +107,7 @@ body {
 
 .notes_container fieldset p {
     font-size: 25px;
-    color: black;
+    color: whitesmoke;
 }
 
 .note_add_container {
@@ -112,11 +119,16 @@ body {
 }
 
 #ref_links_container {
-    background-color: blanchedalmond;
+    padding: 3px 10px 3px 5px;
     height: 100%;
     width: 100%;
     flex: 2;
     margin: 0px 10px 0px 10px;
+    background-color: rgba(0, 0, 0, 0.71);
+    backdrop-filter: blur(20px);
+    color: whitesmoke;
+    border: 2px solid whitesmoke;
+    border-radius: 20px;
 }
 
 textarea {
