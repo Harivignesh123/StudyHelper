@@ -22,10 +22,11 @@ body {
 }
 
 input[type="button"] {
-    background-color: #00695c;
+    background-color: #161e1d;
     color: white;
     transition: 0.2s transform;
     border-radius: 15px;
+    border: 1px solid white;
     cursor: pointer;
     box-shadow: 0 3px #999;
 }
@@ -105,7 +106,8 @@ input[type="button"]:active {
 }
 
 .subject_container {
-    background-color: #00695c;
+    background-color: rgba(0, 0, 0, 0.71);
+    backdrop-filter: blur(20px);
     height: 100px;
     margin-bottom: 15px;
     position: relative;
