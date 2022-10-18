@@ -93,11 +93,11 @@ input[type="button"]:active {
     border-radius: 20px;
 }
 
-#chapter_list_container:hover {
+.chapter_container:hover {
     transform: scale(1.02);
 }
 
-#chapter_list_container:active {
+.chapter_container:active {
     transform: translateY(4px);
 }
 
