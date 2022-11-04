@@ -112,7 +112,9 @@ input[type="button"]:active {
 }
 
 .chapter_add_container {
-    background-color: #004d40;
+    background-color: rgba(0, 0, 0, 0.09);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
     height: 100px;
     margin-bottom: 15px;
     position: relative;
@@ -127,5 +129,5 @@ input[type="button"]:active {
 }
 
 #list_title {
-    color:white;
+    color: white;
 }

@@ -106,7 +106,7 @@ input[type="button"]:active {
 }
 
 .subject_container {
-    background-color: rgba(0, 0, 0, 0.71);
+    background-color: rgba(0, 0, 0, 0.152);
     backdrop-filter: blur(20px);
     height: 100px;
     margin-bottom: 15px;
@@ -140,7 +140,9 @@ input[type="button"]:active {
 }
 
 .subject_add_container {
-    background-color: #004d40;
+    background-color: rgba(0, 0, 0, 0.09);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
     height: 100px;
     margin-bottom: 15px;
     position: relative;

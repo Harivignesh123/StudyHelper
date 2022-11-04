@@ -50,7 +50,7 @@ body {
 }
 
 #chapter_title {
-    color:white;
+    color: white;
     background-color: rgba(0, 0, 0, 0.71);
     backdrop-filter: blur(20px);
     font-size: 30px;
@@ -118,7 +118,9 @@ body {
 }
 
 .note_add_container fieldset {
-    background-color: #00695c;
+    background-color: rgba(106, 106, 106, 0.378);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
 }
 
 #ref_links_container {
