@@ -21,8 +21,18 @@ module.exports.resetpass = (req, res) => {
 module.exports.remainderGet = (req, res) => {
     res.render('SetRemainder');
 }
-module.exports.remainderPost = (req, res) => {
-    const { setdate, email } = req.body;
+module.exports.remainderPost = async(req, res) => {
+    const { email } = req.body;
+    //var ismailsend = sendmail(email);
+    try {
+        const ismailsend = sendmail(email);
+        res.status(200).json({ ismailsend });
+    } catch (e) {
+        res.status(400).json({ e });
+    }
+}
+
+function sendmail(email) {
     var transporter = nodemailer.createTransport({
         service: 'hotmail',
 
@@ -35,23 +45,15 @@ module.exports.remainderPost = (req, res) => {
         from: 'studyhelperiwp@outlook.com',
         to: email,
         subject: 'Remainder on Your academic deadline',
-        text: "You have a due on" + setdate
+        text: "You have a due on"
     };
-    try {
-
-    } catch (e) {
-        res.status(400).json({ e });
-    }
-}
-
-function sendmail() {
     transporter.sendMail(mailoptions, function(error, info) {
         if (error) {
             console.log("im here" + error);
             return false;
         } else {
             console.log('Email sent ' + info.response);
-            true;
+            return true;
         }
     });
 }
