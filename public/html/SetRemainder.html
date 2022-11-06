@@ -32,10 +32,10 @@
                 });
                 const isamilsend = await res.json();
                 if (isamilsend) {
-                    alert("email sent");
+                    alert("email sent" + isamilsend);
                     //location.assign('/');
                 } else {
-                    alert("not snt");
+                    alert("not snt" + isamilsend);
                 }
 
             } catch (err) {

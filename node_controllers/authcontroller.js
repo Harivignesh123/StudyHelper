@@ -25,10 +25,11 @@ module.exports.remainderPost = async(req, res) => {
     const { email } = req.body;
     //var ismailsend = sendmail(email);
     try {
-        const ismailsend = sendmail(email);
-        res.status(200).json({ ismailsend });
+        var ismailsend = sendmail(email);
+        res.json({ ismailsend });
     } catch (e) {
-        res.status(400).json({ e });
+        var msg = "sorry";
+        res.status(400).json({ msg });
     }
 }
 
@@ -50,10 +51,11 @@ function sendmail(email) {
     transporter.sendMail(mailoptions, function(error, info) {
         if (error) {
             console.log("im here" + error);
-            return false;
+            return "No";
         } else {
             console.log('Email sent ' + info.response);
-            return true;
+            return "Yes";
         }
     });
 }
+//console.log(sendmail('kiruthick101@outlook.com'));
