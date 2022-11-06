@@ -24,4 +24,8 @@ router.get('/about', AuthController.aboutpage);
 
 router.get('/resetpassword', AuthController.resetpass);
 
+router.get('/SetRemainder', AuthController.remainderGet);
+
+router.post('/SetRemainder', AuthController.remainderPost);
+
 module.exports = router;
