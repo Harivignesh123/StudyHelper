@@ -22,12 +22,12 @@ module.exports.remainderGet = (req, res) => {
 }
 module.exports.remainderPost = async(req, res) => {
     console.log("server side");
-    const { email, setdate } = req.body;
+    const { email, setdate, title } = req.body;
     //var ismailsend = sendmail(email);
     try {
-        var ismailsend = await sendmail(email);
+        var ismailsend = await sendmail(email, title, setdate);
         if (ismailsend == true) {
-            console.log("success", ismailsend);
+            console.log("success", ismailsend, " ", setdate);
             res.status(201).json({ msg: `Hello , your remainder sent successfully` });
         } else {
             console.log("Sorry", ismailsend);
@@ -42,7 +42,7 @@ module.exports.remainderPost = async(req, res) => {
     }
 }
 
-function sendmail(email) {
+function sendmail(email, title, date) {
     var result = true;
     var transporter = nodemailer.createTransport({
         service: 'hotmail',
@@ -56,7 +56,7 @@ function sendmail(email) {
         from: 'studyhelperiwp@outlook.com',
         to: email,
         subject: 'Remainder on Your academic deadline',
-        text: "You have a due on"
+        text: "Hii!, this is to inform you that your Assignment " + title + " have deadline on " + date
     };
     transporter.sendMail(mailoptions, async function(error, info) {
         if (error) {

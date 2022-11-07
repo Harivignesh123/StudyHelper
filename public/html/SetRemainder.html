@@ -18,7 +18,7 @@
         var form = document.getElementById('form');
         form.addEventListener('submit', async(e) => {
             e.preventDefault();
-            const setdate = document.getElementById("setdate").value.toString();
+            var setdate = document.getElementById("setdate").value;
             var email = document.getElementById("email").value;
             var title = document.getElementById("title").value;
             console.log(setdate, email);
