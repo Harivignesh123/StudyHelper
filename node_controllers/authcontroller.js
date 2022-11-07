@@ -1,4 +1,6 @@
 const nodemailer = require('nodemailer');
+const mysql = require('mysql');
+
 module.exports.SubjectPage = (req, res) => {
     res.render('SubjectPage');
 }
@@ -41,6 +43,45 @@ module.exports.remainderPost = async(req, res) => {
         res.status(400).json({ msg });
     }
 }
+module.exports.InitializeStreak = async(req, res) => {
+    const { createNameInput } = req.body;
+    console.log('creating account');
+    CreateUser(createNameInput);
+}
+
+module.exports.CheckStreak = async(req, res) => {
+    const { name } = req.body;
+    console.log('Checking  accounts streak');
+    VerifyAndUpdateStreak(name);
+}
+
+module.exports.ReturnStreak = async(req, res) => {
+    const { name } = req.body;
+    var con = mysql.createConnection({
+        host: "localhost",
+        user: "root",
+        password: "root",
+        database: "iwp"
+    });
+    con.connect(async function(err) {
+        if (err) throw err;
+        con.query("SELECT * FROM streak WHERE name = '" + name + "'", function(err, result) {
+            if (err) throw err;
+            console.log(1, result);
+            streak = result[0].streak;
+            res.json({ streak });
+            console.log(2, streak);
+        });
+    });
+
+
+}
+
+
+
+
+
+//for sending mail
 
 function sendmail(email, title, date) {
     var result = true;
@@ -69,4 +110,101 @@ function sendmail(email, title, date) {
     });
     return result;
 }
-//console.log(sendmail('kiruthick101@outlook.com'));
+
+
+//for creating account on mysql for users for their 1st login
+function CreateUser(name) {
+
+    var con = mysql.createConnection({
+        host: "localhost",
+        user: "root",
+        password: "root",
+        database: "iwp"
+    });
+    var dateToday = new Date();
+    con.connect(async function(err) {
+        if (err) throw err;
+        con.query("INSERT INTO streak VALUES('" + name + "',1,'" + dateToday + "')", async function(err, result) {
+            if (err) throw err;
+            if (result) {
+                console.log("User Created in MySql for Streak");
+            }
+            console.log(result, typeof(result));
+        });
+    });
+}
+
+
+
+//for verifying and updating streak
+function VerifyAndUpdateStreak(name) {
+
+    var con = mysql.createConnection({
+        host: "localhost",
+        user: "root",
+        password: "root",
+        database: "iwp"
+    });
+    var dateToday = new Date();
+    //getting old timestamp from database
+    con.connect(async function(err) {
+        if (err) throw err;
+        con.query("SELECT * FROM streak WHERE name = '" + name + "'", async function(err, result) {
+            if (err) throw err;
+            if (result) {
+                updateTimeStamp(name, dateToday);
+                var dateprev = new Date(result[0].timestamp);
+                var diff_days = await DaysDifferenceCalculation(dateToday, dateprev);
+                if (diff_days < 1) {
+                    var streak = result[0].streak + 1;
+                    updateStreak(streak, name);
+                } else {
+                    updateStreak(1, name);
+                }
+            }
+            console.log(result, typeof(result));
+            console.log(dateprev);
+        });
+    });
+}
+// for updating streak
+function updateStreak(streak, name) {
+    var con3 = mysql.createConnection({
+        host: "localhost",
+        user: "root",
+        password: "root",
+        database: "iwp"
+    });
+    con3.connect(async function(err) {
+        if (err) throw err;
+        var sql = "UPDATE streak SET streak = '" + streak + "' WHERE name = '" + name + "'";
+        con3.query(sql, function(err, result) {
+            if (err) throw err;
+            console.log(result.affectedRows + "streak record(s) updated");
+        });
+    });
+}
+//difference between days calculation
+function DaysDifferenceCalculation(dateToday, dateprev) {
+    var diff_time = dateToday.getTime() - dateprev.getTime();
+    var diff_days = diff_time / (1000 * 3600 * 24);
+    console.log("Diiference: " + diff_days);
+    return diff_days;
+}
+
+function updateTimeStamp(name, dateToday) {
+    var con2 = mysql.createConnection({
+        host: "localhost",
+        user: "root",
+        password: "root",
+        database: "iwp"
+    });
+    con2.connect(async function(err) {
+        if (err) throw err;
+        var sql = "UPDATE streak SET timestamp = '" + dateToday + "' WHERE name = '" + name + "'";
+        con2.query(sql, function(err, result) {
+            if (err) throw err;
+            console.log(result.affectedRows + "timestamp record(s) updated");
+        });
+    });
+}

@@ -31,13 +31,10 @@ router.get('/SetRemainder', AuthController.remainderGet);
 
 router.post('/SetRemainder', AuthController.remainderPost);
 
-// router.post('/SetRemainder', (req, res) => {
-//     console.log('Hello this is server side!');
-//     // const { email, setdate } = req.body;
-//     // console.log(email);
-// });
-router.post("/jsondata", function(req, res) {
-    res.json({ msg: `Hello , your email is ${req.body.email}` });
-});
+router.post('/InitializeStreak', AuthController.InitializeStreak);
+
+router.post('/CheckStreak', AuthController.CheckStreak);
+
+router.post('/ReturnStreak', AuthController.ReturnStreak);
 
 module.exports = router;

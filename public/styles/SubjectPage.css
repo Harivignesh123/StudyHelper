@@ -53,7 +53,7 @@ input[type="button"]:active {
 }
 
 #status_bar #MainPage {
-    margin-right: 78%;
+    margin-right: 76%;
     text-decoration: none;
     color: white;
     font-size: 20px;
@@ -63,6 +63,11 @@ input[type="button"]:active {
     flex-wrap: nowrap;
     justify-content: left;
     align-items: left;
+}
+
+#streak {
+    margin-right: 2.5%;
+    color: aliceblue;
 }
 
 #status_bar #profileLogo {

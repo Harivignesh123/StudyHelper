@@ -42,6 +42,7 @@ function LoginAccount() {
             localStorage.setItem("user_name", user.displayName);
             localStorage.setItem("user_uid", uid);
             console.log(user.displayName);
+            CheckAndUpdateStreak(user.displayName);
             // window.open("../html/SubjectPage.html","_self");
             location.assign('/SubjectPage');
         })
@@ -68,6 +69,8 @@ function CreateAccount() {
     const createPasswordInput = document.getElementById("create_password_input").value.trim();
     const createConfirmPasswordInput = document.getElementById("create_confirm_password_input").value.trim();
 
+
+
     if (createNameInput.length == 0 || createEmailInput.length == 0 || createPasswordInput.length == 0 || createConfirmPasswordInput.length == 0) {
         alert("Fill all the fields");
         return;
@@ -82,7 +85,7 @@ function CreateAccount() {
         alert("Passwords did not match");
         return;
     }
-
+    createStreakForUser(createNameInput);
     createUserWithEmailAndPassword(auth, createEmailInput, createPasswordInput)
         .then((userCredential) => {
             const user = userCredential.user;
@@ -115,4 +118,36 @@ function CreateAccount() {
             }
 
         });
+}
+
+async function createStreakForUser(createNameInput) {
+    try {
+        await fetch('/InitializeStreak', {
+            method: 'POST',
+            body: JSON.stringify({
+                createNameInput: createNameInput
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+async function CheckAndUpdateStreak(name) {
+    try {
+        await fetch('/CheckStreak', {
+            method: 'POST',
+            body: JSON.stringify({
+                name: name
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+    } catch (e) {
+        console.log(e);
+    }
 }

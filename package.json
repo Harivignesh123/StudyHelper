@@ -66,6 +66,7 @@
         "minimist": "^0.0.10",
         "morgan": "^1.10.0",
         "ms": "^2.1.3",
+        "mysql": "^2.18.1",
         "negotiator": "^0.6.3",
         "nodemailer": "^6.8.0",
         "nodemon": "^2.0.20",
