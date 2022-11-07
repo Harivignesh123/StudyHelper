@@ -2,7 +2,6 @@ const nodemailer = require('nodemailer');
 module.exports.SubjectPage = (req, res) => {
     res.render('SubjectPage');
 }
-
 module.exports.login = (req, res) => {
     res.render('login');
 }
@@ -22,11 +21,21 @@ module.exports.remainderGet = (req, res) => {
     res.render('SetRemainder');
 }
 module.exports.remainderPost = async(req, res) => {
-    const { email } = req.body;
+    console.log("server side");
+    const { email, setdate } = req.body;
     //var ismailsend = sendmail(email);
     try {
-        var ismailsend = sendmail(email);
-        res.json({ ismailsend });
+        var ismailsend = await sendmail(email);
+        if (ismailsend == true) {
+            console.log("success", ismailsend);
+            res.status(201).json({ msg: `Hello , your remainder sent successfully` });
+        } else {
+            console.log("Sorry", ismailsend);
+            res.status(201).json({ msg: `Hello , your remainder not sent successfully` });
+        }
+
+
+        //res.json({ email });
     } catch (e) {
         var msg = "sorry";
         res.status(400).json({ msg });
@@ -34,6 +43,7 @@ module.exports.remainderPost = async(req, res) => {
 }
 
 function sendmail(email) {
+    var result = true;
     var transporter = nodemailer.createTransport({
         service: 'hotmail',
 
@@ -48,14 +58,15 @@ function sendmail(email) {
         subject: 'Remainder on Your academic deadline',
         text: "You have a due on"
     };
-    transporter.sendMail(mailoptions, function(error, info) {
+    transporter.sendMail(mailoptions, async function(error, info) {
         if (error) {
             console.log("im here" + error);
-            return "No";
+            result = false;
         } else {
             console.log('Email sent ' + info.response);
-            return "Yes";
+            result = true;
         }
     });
+    return result;
 }
 //console.log(sendmail('kiruthick101@outlook.com'));

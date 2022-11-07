@@ -1,4 +1,5 @@
 const express = require('express');
+
 const app = express();
 const cons = require('consolidate'); //for setting html as default view engine
 const Router = require('./node_routes/authroutes');

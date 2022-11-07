@@ -11,6 +11,7 @@
     <form id="form">
         <input type="datetime-local" id="setdate"><br>
         <input type="email" name="email" id="email" placeholder="Enter your email">
+        <input type="text" name="Enter your Assignment title" id="title">
         <input type="submit" value="set">
     </form>
     <script>
@@ -18,28 +19,29 @@
         form.addEventListener('submit', async(e) => {
             e.preventDefault();
             const setdate = document.getElementById("setdate").value.toString();
-            const email = document.getElementById("email").value.toString();
-            console.log(setdate);
+            var email = document.getElementById("email").value;
+            var title = document.getElementById("title").value;
+            console.log(setdate, email);
             try {
                 const res = await fetch('/SetRemainder', {
-                    method: 'POST',
-                    body: JSON.stringify({
-                        email
-                    }),
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                });
-                const isamilsend = await res.json();
-                if (isamilsend) {
-                    alert("email sent" + isamilsend);
-                    //location.assign('/');
-                } else {
-                    alert("not snt" + isamilsend);
-                }
-
-            } catch (err) {
-                console.log(err);
+                        method: 'POST',
+                        body: JSON.stringify({
+                            email: email,
+                            setdate: setdate,
+                            title: title
+                        }),
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    .then(function(response) {
+                        return response.json();
+                    })
+                    .then(function(data) {
+                        alert(data.msg);
+                    })
+            } catch (error) {
+                console.log(error);
             }
         });
     </script>
