@@ -45,17 +45,18 @@ module.exports.remainderPost = async(req, res) => {
 }
 module.exports.InitializeStreak = async(req, res) => {
     const { createNameInput } = req.body;
-    console.log('creating account');
+    console.log('creating account in mysql for checking streak');
     CreateUser(createNameInput);
 }
 
 module.exports.CheckStreak = async(req, res) => {
     const { name } = req.body;
-    console.log('Checking  accounts streak');
+    console.log('Checking  Users streak');
     VerifyAndUpdateStreak(name);
 }
 
 module.exports.ReturnStreak = async(req, res) => {
+    console.log("=-=-=-Fetching User's streak-=-=-=");
     const { name } = req.body;
     var con = mysql.createConnection({
         host: "localhost",
@@ -67,10 +68,8 @@ module.exports.ReturnStreak = async(req, res) => {
         if (err) throw err;
         con.query("SELECT * FROM streak WHERE name = '" + name + "'", function(err, result) {
             if (err) throw err;
-            console.log(1, result);
             streak = result[0].streak;
             res.json({ streak });
-            console.log(2, streak);
         });
     });
 
@@ -101,7 +100,7 @@ function sendmail(email, title, date) {
     };
     transporter.sendMail(mailoptions, async function(error, info) {
         if (error) {
-            console.log("im here" + error);
+            console.log("Sorry , Remainder Not sent some problem!" + error);
             result = false;
         } else {
             console.log('Email sent ' + info.response);
@@ -129,7 +128,6 @@ function CreateUser(name) {
             if (result) {
                 console.log("User Created in MySql for Streak");
             }
-            console.log(result, typeof(result));
         });
     });
 }
@@ -166,18 +164,14 @@ function VerifyAndUpdateStreak(name) {
                     }
                 }
                 if (Math.floor(diff_days) < 2 && flag == false) {
-                    console.log('flag', flag);
                     var streak = result[0].streak + 1;
                     updateStreak(streak, name);
                 } else if (Math.floor(diff_days) > 1) {
                     updateStreak(1, name);
-                    console.log('flag', flag);
                 } else {
-                    console.log('--!nothing happens!--');
+                    console.log('--!nothing updated(last login today only and streak added already)!--');
                 }
             }
-            console.log(result, typeof(result));
-            console.log(dateprev);
         });
     });
 }
