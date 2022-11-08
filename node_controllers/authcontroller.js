@@ -35,8 +35,6 @@ module.exports.remainderPost = async(req, res) => {
             console.log("Sorry", ismailsend);
             res.status(201).json({ msg: `Hello , your remainder not sent successfully` });
         }
-
-
         //res.json({ email });
     } catch (e) {
         var msg = "sorry";
@@ -72,13 +70,7 @@ module.exports.ReturnStreak = async(req, res) => {
             res.json({ streak });
         });
     });
-
-
 }
-
-
-
-
 
 //for sending mail
 
