@@ -6,10 +6,54 @@ body {
     padding: 0px;
     overflow-x: hidden;
     font-family: Helvetica;
+    background: url("../res/images/Background.jpg")10%/ cover;
 }
 
+
+/* animation */
+
 body {
-    background: url("../res/images/Background.jpg")10%/ cover;
+    background: linear-gradient(270deg, #000000bb, #01165bae, #460b70a4);
+    background-size: 600% 600%;
+    -webkit-animation: AnimationName 2s ease infinite;
+    -moz-animation: AnimationName 3s ease infinite;
+    animation: AnimationName 3s ease infinite;
+}
+
+@-webkit-keyframes AnimationName {
+    0% {
+        background-position: 0% 50%
+    }
+    50% {
+        background-position: 100% 50%
+    }
+    100% {
+        background-position: 0% 50%
+    }
+}
+
+@-moz-keyframes AnimationName {
+    0% {
+        background-position: 0% 50%
+    }
+    50% {
+        background-position: 100% 50%
+    }
+    100% {
+        background-position: 0% 50%
+    }
+}
+
+@keyframes AnimationName {
+    0% {
+        background-position: 0% 50%
+    }
+    50% {
+        background-position: 100% 50%
+    }
+    100% {
+        background-position: 0% 50%
+    }
 }
 
 #CenterAllign {
@@ -115,7 +159,7 @@ input[type="button"]:active {
 }
 
 .subject_container {
-    background-color: rgba(0, 0, 0, 0.152);
+    background-color: rgba(73, 73, 73, 0.152);
     backdrop-filter: blur(20px);
     height: 100px;
     margin-bottom: 15px;
@@ -125,7 +169,7 @@ input[type="button"]:active {
 }
 
 .subject_container:hover {
-    transform: scale(1.02);
+    transform: scale(1.009);
 }
 
 .subject_container:active {
