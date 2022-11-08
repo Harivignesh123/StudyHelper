@@ -155,11 +155,25 @@ function VerifyAndUpdateStreak(name) {
                 updateTimeStamp(name, dateToday);
                 var dateprev = new Date(result[0].timestamp);
                 var diff_days = await DaysDifferenceCalculation(dateToday, dateprev);
-                if (diff_days < 1) {
+                var flag = CheckIfToday();
+
+                function CheckIfToday() {
+                    if ((dateToday.getDate() == dateprev.getDate()) && (dateToday.getMonth() == dateprev.getMonth()) && (dateToday.getFullYear() == dateprev.getFullYear())) {
+                        console.log("==== same date only ====");
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+                if (Math.floor(diff_days) < 2 && flag == false) {
+                    console.log('flag', flag);
                     var streak = result[0].streak + 1;
                     updateStreak(streak, name);
-                } else {
+                } else if (Math.floor(diff_days) > 1) {
                     updateStreak(1, name);
+                    console.log('flag', flag);
+                } else {
+                    console.log('--!nothing happens!--');
                 }
             }
             console.log(result, typeof(result));
