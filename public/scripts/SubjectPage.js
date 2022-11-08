@@ -21,7 +21,7 @@ async function CalculateStreak(name) {
             })
             .then(async function(data) {
                 console.log(data.streak);
-                streak.innerHTML = 'Streak ' + data.streak;
+                streak.innerHTML = 'Streak ' + data.streak + '&#128293';
             })
     } catch (err) {
         console.log(err);

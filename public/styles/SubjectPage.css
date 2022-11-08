@@ -65,6 +65,10 @@ input[type="button"]:active {
     align-items: left;
 }
 
+#remainderbtn {
+    height: 24px;
+}
+
 #streak {
     margin-right: 2.5%;
     color: aliceblue;
