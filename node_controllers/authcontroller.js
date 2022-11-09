@@ -54,22 +54,22 @@ module.exports.CheckStreak = async(req, res) => {
 }
 
 module.exports.ReturnStreak = async(req, res) => {
-    console.log("=-=-=-Fetching User's streak-=-=-=");
-    const { name } = req.body;
-    var con = mysql.createConnection({
-        host: "localhost",
-        user: "root",
-        password: "root",
-        database: "iwp"
-    });
-    con.connect(async function(err) {
-        if (err) throw err;
-        con.query("SELECT * FROM streak WHERE name = '" + name + "'", function(err, result) {
-            if (err) throw err;
-            streak = result[0].streak;
-            res.json({ streak });
-        });
-    });
+    // console.log("=-=-=-Fetching User's streak-=-=-=");
+    // const { name } = req.body;
+    // var con = mysql.createConnection({
+    //     host: "localhost",
+    //     user: "root",
+    //     password: "root",
+    //     database: "iwp"
+    // });
+    // con.connect(async function(err) {
+    //     if (err) throw err;
+    //     con.query("SELECT * FROM streak WHERE name = '" + name + "'", function(err, result) {
+    //         if (err) throw err;
+    //         streak = result[0].streak;
+    //         res.json({ streak });
+    //     });
+    // });
 }
 
 //for sending mail
@@ -106,22 +106,22 @@ function sendmail(email, title, date) {
 //for creating account on mysql for users for their 1st login
 function CreateUser(name) {
 
-    var con = mysql.createConnection({
-        host: "localhost",
-        user: "root",
-        password: "root",
-        database: "iwp"
-    });
-    var dateToday = new Date();
-    con.connect(async function(err) {
-        if (err) throw err;
-        con.query("INSERT INTO streak VALUES('" + name + "',1,'" + dateToday + "')", async function(err, result) {
-            if (err) throw err;
-            if (result) {
-                console.log("User Created in MySql for Streak");
-            }
-        });
-    });
+    // var con = mysql.createConnection({
+    //     host: "localhost",
+    //     user: "root",
+    //     password: "root",
+    //     database: "iwp"
+    // });
+    // var dateToday = new Date();
+    // con.connect(async function(err) {
+    //     if (err) throw err;
+    //     con.query("INSERT INTO streak VALUES('" + name + "',1,'" + dateToday + "')", async function(err, result) {
+    //         if (err) throw err;
+    //         if (result) {
+    //             console.log("User Created in MySql for Streak");
+    //         }
+    //     });
+    // });
 }
 
 
@@ -129,60 +129,60 @@ function CreateUser(name) {
 //for verifying and updating streak
 function VerifyAndUpdateStreak(name) {
 
-    var con = mysql.createConnection({
-        host: "localhost",
-        user: "root",
-        password: "root",
-        database: "iwp"
-    });
-    var dateToday = new Date();
-    //getting old timestamp from database
-    con.connect(async function(err) {
-        if (err) throw err;
-        con.query("SELECT * FROM streak WHERE name = '" + name + "'", async function(err, result) {
-            if (err) throw err;
-            if (result) {
-                updateTimeStamp(name, dateToday);
-                var dateprev = new Date(result[0].timestamp);
-                var diff_days = await DaysDifferenceCalculation(dateToday, dateprev);
-                var flag = CheckIfToday();
+    // var con = mysql.createConnection({
+    //     host: "localhost",
+    //     user: "root",
+    //     password: "root",
+    //     database: "iwp"
+    // });
+    // var dateToday = new Date();
+    // //getting old timestamp from database
+    // con.connect(async function(err) {
+    //     if (err) throw err;
+    //     con.query("SELECT * FROM streak WHERE name = '" + name + "'", async function(err, result) {
+    //         if (err) throw err;
+    //         if (result) {
+    //             updateTimeStamp(name, dateToday);
+    //             var dateprev = new Date(result[0].timestamp);
+    //             var diff_days = await DaysDifferenceCalculation(dateToday, dateprev);
+    //             var flag = CheckIfToday();
 
-                function CheckIfToday() {
-                    if ((dateToday.getDate() == dateprev.getDate()) && (dateToday.getMonth() == dateprev.getMonth()) && (dateToday.getFullYear() == dateprev.getFullYear())) {
-                        console.log("==== same date only ====");
-                        return true;
-                    } else {
-                        return false;
-                    }
-                }
-                if (Math.floor(diff_days) < 2 && flag == false) {
-                    var streak = result[0].streak + 1;
-                    updateStreak(streak, name);
-                } else if (Math.floor(diff_days) > 1) {
-                    updateStreak(1, name);
-                } else {
-                    console.log('--!nothing updated(last login today only and streak added already)!--');
-                }
-            }
-        });
-    });
+    //             function CheckIfToday() {
+    //                 if ((dateToday.getDate() == dateprev.getDate()) && (dateToday.getMonth() == dateprev.getMonth()) && (dateToday.getFullYear() == dateprev.getFullYear())) {
+    //                     console.log("==== same date only ====");
+    //                     return true;
+    //                 } else {
+    //                     return false;
+    //                 }
+    //             }
+    //             if (Math.floor(diff_days) < 2 && flag == false) {
+    //                 var streak = result[0].streak + 1;
+    //                 updateStreak(streak, name);
+    //             } else if (Math.floor(diff_days) > 1) {
+    //                 updateStreak(1, name);
+    //             } else {
+    //                 console.log('--!nothing updated(last login today only and streak added already)!--');
+    //             }
+    //         }
+    //     });
+    // });
 }
 // for updating streak
 function updateStreak(streak, name) {
-    var con3 = mysql.createConnection({
-        host: "localhost",
-        user: "root",
-        password: "root",
-        database: "iwp"
-    });
-    con3.connect(async function(err) {
-        if (err) throw err;
-        var sql = "UPDATE streak SET streak = '" + streak + "' WHERE name = '" + name + "'";
-        con3.query(sql, function(err, result) {
-            if (err) throw err;
-            console.log(result.affectedRows + "streak record(s) updated");
-        });
-    });
+    // var con3 = mysql.createConnection({
+    //     host: "localhost",
+    //     user: "root",
+    //     password: "root",
+    //     database: "iwp"
+    // });
+    // con3.connect(async function(err) {
+    //     if (err) throw err;
+    //     var sql = "UPDATE streak SET streak = '" + streak + "' WHERE name = '" + name + "'";
+    //     con3.query(sql, function(err, result) {
+    //         if (err) throw err;
+    //         console.log(result.affectedRows + "streak record(s) updated");
+    //     });
+    // });
 }
 //difference between days calculation
 function DaysDifferenceCalculation(dateToday, dateprev) {
@@ -193,18 +193,18 @@ function DaysDifferenceCalculation(dateToday, dateprev) {
 }
 
 function updateTimeStamp(name, dateToday) {
-    var con2 = mysql.createConnection({
-        host: "localhost",
-        user: "root",
-        password: "root",
-        database: "iwp"
-    });
-    con2.connect(async function(err) {
-        if (err) throw err;
-        var sql = "UPDATE streak SET timestamp = '" + dateToday + "' WHERE name = '" + name + "'";
-        con2.query(sql, function(err, result) {
-            if (err) throw err;
-            console.log(result.affectedRows + "timestamp record(s) updated");
-        });
-    });
+    // var con2 = mysql.createConnection({
+    //     host: "localhost",
+    //     user: "root",
+    //     password: "root",
+    //     database: "iwp"
+    // });
+    // con2.connect(async function(err) {
+    //     if (err) throw err;
+    //     var sql = "UPDATE streak SET timestamp = '" + dateToday + "' WHERE name = '" + name + "'";
+    //     con2.query(sql, function(err, result) {
+    //         if (err) throw err;
+    //         console.log(result.affectedRows + "timestamp record(s) updated");
+    //     });
+    // });
 }
