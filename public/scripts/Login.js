@@ -41,6 +41,7 @@ function LoginAccount() {
             const uid = user.uid;
             localStorage.setItem("user_name", user.displayName);
             localStorage.setItem("user_uid", uid);
+            localStorage.setItem("email",loginEmailInput);
             console.log(user.displayName);
             CheckAndUpdateStreak(loginEmailInput);
             // window.open("../html/SubjectPage.html","_self");
@@ -97,6 +98,7 @@ function CreateAccount() {
                 update(ref(db), json).then(function() {
                     localStorage.setItem("user_name", user.displayName);
                     localStorage.setItem("user_uid", user.uid);
+                    localStorage.setItem("email",createEmailInput);
                     //window.open("../html/SubjectPage.html", "_self");
                     createStreakForUser(createEmailInput);
                     
