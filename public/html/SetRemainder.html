@@ -10,7 +10,7 @@
 
 <body>
     <form id="form">
-        Date: <input type="datetime-local" id="setdate"><br><br> Email: <input type="email" name="email" id="email" placeholder="Enter your email"><br><br> Title: <input type="text" name="title" id="title" placeholder="Enter your Assignment title"><br><br>
+        Date: <input type="datetime-local" id="setdate"><br><br>Title: <input type="text" name="title" id="title" placeholder="Enter your Assignment title"><br><br>
         <input type="submit" value="Set Remainder">
     </form>
     <script>
@@ -18,7 +18,7 @@
         form.addEventListener('submit', async(e) => {
             e.preventDefault();
             var setdate = document.getElementById("setdate").value;
-            var email = document.getElementById("email").value;
+            var email = localStorage.getItem("email");
             var title = document.getElementById("title").value;
             console.log(setdate, email);
             try {
