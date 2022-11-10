@@ -1,5 +1,16 @@
 const nodemailer = require('nodemailer');
 const mysql = require('mysql');
+const initialStreak=1;
+
+let con=null;
+function InitializeDatabaseConnection(){
+    con= mysql.createConnection({
+        host: "b4bskferou4xvjc2kbiv-mysql.services.clever-cloud.com",
+        user: "uqn7o0kzuzjvdzff",
+        password: "ATSZ6BwDDDGDjT9WJmhs",
+        database: "b4bskferou4xvjc2kbiv"
+    });
+}
 
 module.exports.SubjectPage = (req, res) => {
     res.render('SubjectPage');
@@ -41,36 +52,23 @@ module.exports.remainderPost = async(req, res) => {
         res.status(400).json({ msg });
     }
 }
+let newStreak;
 module.exports.InitializeStreak = async(req, res) => {
-    const { createNameInput } = req.body;
+    const { mailID } = req.body;
     console.log('creating account in mysql for checking streak');
-    CreateUser(createNameInput);
+    CreateUser(mailID,res);
+
 }
 
 module.exports.CheckStreak = async(req, res) => {
-    const { name } = req.body;
+    const { mailID } = req.body;
     console.log('Checking  Users streak');
-    VerifyAndUpdateStreak(name);
+    VerifyAndUpdateStreak(mailID,res);
+    
+    
+
 }
 
-module.exports.ReturnStreak = async(req, res) => {
-    // console.log("=-=-=-Fetching User's streak-=-=-=");
-    // const { name } = req.body;
-    // var con = mysql.createConnection({
-    //     host: "localhost",
-    //     user: "root",
-    //     password: "root",
-    //     database: "iwp"
-    // });
-    // con.connect(async function(err) {
-    //     if (err) throw err;
-    //     con.query("SELECT * FROM streak WHERE name = '" + name + "'", function(err, result) {
-    //         if (err) throw err;
-    //         streak = result[0].streak;
-    //         res.json({ streak });
-    //     });
-    // });
-}
 
 //for sending mail
 
@@ -104,107 +102,132 @@ function sendmail(email, title, date) {
 
 
 //for creating account on mysql for users for their 1st login
-function CreateUser(name) {
+function CreateUser(mailID,res) {
 
-    // var con = mysql.createConnection({
-    //     host: "localhost",
-    //     user: "root",
-    //     password: "root",
-    //     database: "iwp"
-    // });
-    // var dateToday = new Date();
-    // con.connect(async function(err) {
-    //     if (err) throw err;
-    //     con.query("INSERT INTO streak VALUES('" + name + "',1,'" + dateToday + "')", async function(err, result) {
-    //         if (err) throw err;
-    //         if (result) {
-    //             console.log("User Created in MySql for Streak");
-    //         }
-    //     });
-    // });
+    InitializeDatabaseConnection();
+    con.connect(function(err) {
+        if (err) throw err;
+        con.query("INSERT INTO streak VALUES('" + mailID + "',"+initialStreak+"," + "CURRENT_TIMESTAMP" + ")",function(err, result) {
+            if (err) throw err;
+            if (result) {
+                console.log("User Created in MySql for Streak");
+            }
+            const newStreak=initialStreak;
+            res.json({newStreak});
+            con.end();
+        });
+    });
 }
 
 
 
 //for verifying and updating streak
-function VerifyAndUpdateStreak(name) {
+function VerifyAndUpdateStreak(mailID,res) {
+    
 
-    // var con = mysql.createConnection({
-    //     host: "localhost",
-    //     user: "root",
-    //     password: "root",
-    //     database: "iwp"
-    // });
-    // var dateToday = new Date();
-    // //getting old timestamp from database
-    // con.connect(async function(err) {
-    //     if (err) throw err;
-    //     con.query("SELECT * FROM streak WHERE name = '" + name + "'", async function(err, result) {
-    //         if (err) throw err;
-    //         if (result) {
-    //             updateTimeStamp(name, dateToday);
-    //             var dateprev = new Date(result[0].timestamp);
-    //             var diff_days = await DaysDifferenceCalculation(dateToday, dateprev);
-    //             var flag = CheckIfToday();
+    InitializeDatabaseConnection();
+    con.connect(function(err) {
+        if (err){
+            throw err;
+        }
+        console.log("Database connection successful");
+        con.query("SELECT * FROM streak WHERE mailID = '" + mailID + "'",function(err, result) {
+            if (err) throw err;
+            if (result) {
 
-    //             function CheckIfToday() {
-    //                 if ((dateToday.getDate() == dateprev.getDate()) && (dateToday.getMonth() == dateprev.getMonth()) && (dateToday.getFullYear() == dateprev.getFullYear())) {
-    //                     console.log("==== same date only ====");
-    //                     return true;
-    //                 } else {
-    //                     return false;
-    //                 }
-    //             }
-    //             if (Math.floor(diff_days) < 2 && flag == false) {
-    //                 var streak = result[0].streak + 1;
-    //                 updateStreak(streak, name);
-    //             } else if (Math.floor(diff_days) > 1) {
-    //                 updateStreak(1, name);
-    //             } else {
-    //                 console.log('--!nothing updated(last login today only and streak added already)!--');
-    //             }
-    //         }
-    //     });
-    // });
+            
+                let oldDate=null;
+                let currentDate=new Date();
+                let nextDate=new Date();
+
+            
+                if(result[0].timestamp!=null){
+                    oldDate = new Date(result[0].timestamp);
+                    currentDate=new Date();
+                    nextDate=new Date();
+                    nextDate.setDate(oldDate.getDate()+1);   
+                }
+                
+            
+                currentStreak=result[0].streak;
+  
+                
+                // console.log("Old date: "+oldDate);
+                // console.log("Current date: "+currentDate);
+                // console.log("Next date: "+nextDate);
+
+                con.end();
+                let newStreak;
+                if(oldDate==null||CheckIfNextDay(currentDate,nextDate)){
+                    if(oldDate==null){
+                        console.log("First day");
+                    }
+                    else{
+                        console.log("Consecutive day");
+                    } 
+                    updateStreak(currentStreak+1,mailID);
+                    newStreak=currentStreak+1;
+                   
+
+                }
+                else if(CheckIfToday(oldDate,currentDate)){
+                    console.log("Same Day");
+                    updateStreak(currentStreak,mailID);  
+                    newStreak=currentStreak;  
+                
+                }
+                else{
+                    console.log("Not consecutive day");
+                    updateStreak(initialStreak,mailID);
+                    newStreak=currentStreak+1;
+                
+                }
+                
+                res.json({newStreak});
+                
+
+            }
+        });
+       
+    });
+    
 }
 // for updating streak
-function updateStreak(streak, name) {
-    // var con3 = mysql.createConnection({
-    //     host: "localhost",
-    //     user: "root",
-    //     password: "root",
-    //     database: "iwp"
-    // });
-    // con3.connect(async function(err) {
-    //     if (err) throw err;
-    //     var sql = "UPDATE streak SET streak = '" + streak + "' WHERE name = '" + name + "'";
-    //     con3.query(sql, function(err, result) {
-    //         if (err) throw err;
-    //         console.log(result.affectedRows + "streak record(s) updated");
-    //     });
-    // });
-}
-//difference between days calculation
-function DaysDifferenceCalculation(dateToday, dateprev) {
-    var diff_time = dateToday.getTime() - dateprev.getTime();
-    var diff_days = diff_time / (1000 * 3600 * 24);
-    console.log("Diiference: " + diff_days);
-    return diff_days;
+function updateStreak(streak,mailID) {
+    InitializeDatabaseConnection();
+    con.connect(function(err) {
+        if (err) throw err;
+        var sql = "UPDATE streak SET streak ="+streak+",timestamp="+"CURRENT_TIMESTAMP"+" WHERE mailID = '" + mailID + "';";
+        con.query(sql, function(err, result) {
+            if (err) throw err;
+            console.log(result.affectedRows + "streak record(s) updated");
+            con.end();
+            
+        });
+        
+    });
+  
 }
 
-function updateTimeStamp(name, dateToday) {
-    // var con2 = mysql.createConnection({
-    //     host: "localhost",
-    //     user: "root",
-    //     password: "root",
-    //     database: "iwp"
-    // });
-    // con2.connect(async function(err) {
-    //     if (err) throw err;
-    //     var sql = "UPDATE streak SET timestamp = '" + dateToday + "' WHERE name = '" + name + "'";
-    //     con2.query(sql, function(err, result) {
-    //         if (err) throw err;
-    //         console.log(result.affectedRows + "timestamp record(s) updated");
-    //     });
-    // });
+
+function CheckIfNextDay(currentDate,nextDate) {
+    if(currentDate.getDate()==nextDate.getDate()&&currentDate.getMonth()==nextDate.getMonth()&&currentDate.getFullYear()==nextDate.getFullYear()){
+        return true;
+    }
+    else{
+        return false;
+    }
+
+    
 }
+function CheckIfToday(oldDate,currentDate){
+    if(currentDate.getDate()==oldDate.getDate()&&currentDate.getMonth()==oldDate.getMonth()&&currentDate.getFullYear()==oldDate.getFullYear()){
+        return true;
+    }
+    else{
+        return false;
+    }
+
+}
+
+

@@ -5,28 +5,7 @@ import { subjectNameLength } from "../modules/Contract.js";
 const addSubjectButton = document.getElementById("add_subject_button");
 const subjectListContainerBox = document.getElementById("subject_list_container");
 const streak = document.getElementById("streak");
-async function CalculateStreak(name) {
-    try {
-        const res = await fetch('/ReturnStreak', {
-                method: 'POST',
-                body: JSON.stringify({
-                    name: name
-                }),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then(async function(response) {
-                return response.json();
-            })
-            .then(async function(data) {
-                console.log(data.streak);
-                streak.innerHTML = 'Streak ' + data.streak + '&#128293';
-            })
-    } catch (err) {
-        console.log(err);
-    }
-}
+
 
 let user_uid;
 let dbRef;
@@ -45,7 +24,7 @@ function LoadExisitngSubjects() {
     user_uid = localStorage.getItem("user_uid");
     const heading = document.getElementById("status_bar").querySelector('#name');
     const userName = localStorage.getItem("user_name");
-    CalculateStreak(userName);
+    streak.innerHTML = 'Streak ' + localStorage.getItem("streakValue") + '&#128293';
     heading.innerHTML = userName;
     dbRef = user_uid + "/";
 

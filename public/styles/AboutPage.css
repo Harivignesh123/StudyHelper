@@ -43,6 +43,56 @@ body {
     border-radius: 10%;
 }
 
+
+/* animation */
+
+body {
+    background: linear-gradient(270deg, #ff000040, #ff910044, #fff7003d, #6aff0042, #00ff6245, #00ffd04a, #00bbff3d, #004cff48, #6a00ff6f, #a06fe54d, #dd6fe546, #f0487d42, #f51c1c42);
+    background-size: 2600% 2600%;
+    -webkit-animation: AnimationName 32s ease infinite;
+    -moz-animation: AnimationName 32s ease infinite;
+    animation: AnimationName 32s ease infinite;
+}
+
+@-webkit-keyframes AnimationName {
+    0% {
+        background-position: 0% 50%
+    }
+    50% {
+        background-position: 100% 50%
+    }
+    100% {
+        background-position: 0% 50%
+    }
+}
+
+@-moz-keyframes AnimationName {
+    0% {
+        background-position: 0% 50%
+    }
+    50% {
+        background-position: 100% 50%
+    }
+    100% {
+        background-position: 0% 50%
+    }
+}
+
+@keyframes AnimationName {
+    0% {
+        background-position: 0% 50%
+    }
+    50% {
+        background-position: 100% 50%
+    }
+    100% {
+        background-position: 0% 50%
+    }
+}
+
+
+/* animation ends here */
+
 #img_1,
 #p_1 {
     align-items: center;

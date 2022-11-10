@@ -35,6 +35,5 @@ router.post('/InitializeStreak', AuthController.InitializeStreak);
 
 router.post('/CheckStreak', AuthController.CheckStreak);
 
-router.post('/ReturnStreak', AuthController.ReturnStreak);
 
 module.exports = router;

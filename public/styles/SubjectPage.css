@@ -13,11 +13,11 @@ body {
 /* animation */
 
 body {
-    background: linear-gradient(270deg, #000000bb, #01165bae, #460b70a4);
-    background-size: 600% 600%;
-    -webkit-animation: AnimationName 2s ease infinite;
-    -moz-animation: AnimationName 3s ease infinite;
-    animation: AnimationName 3s ease infinite;
+    background: linear-gradient(270deg, #ff000040, #ff910044, #fff7003d, #6aff0042, #00ff6245, #00ffd04a, #00bbff3d, #004cff48, #6a00ff6f, #a06fe54d, #dd6fe546, #f0487d42, #f51c1c42);
+    background-size: 2600% 2600%;
+    -webkit-animation: AnimationName 32s ease infinite;
+    -moz-animation: AnimationName 32s ease infinite;
+    animation: AnimationName 32s ease infinite;
 }
 
 @-webkit-keyframes AnimationName {
@@ -56,6 +56,9 @@ body {
     }
 }
 
+
+/* animation ends here */
+
 #CenterAllign {
     max-width: 70%;
     margin: auto;
@@ -76,12 +79,12 @@ input[type="button"] {
 }
 
 input[type="button"]:hover {
-    transform: scale(1.2);
+    transform: scale(1.09);
 }
 
 input[type="button"]:active {
     box-shadow: 0 2px #666;
-    transform: translateY(4px);
+    transform: translateY(2px);
 }
 
 #status_bar {
@@ -97,7 +100,7 @@ input[type="button"]:active {
 }
 
 #status_bar #MainPage {
-    margin-right: 76%;
+    margin-right: 74%;
     text-decoration: none;
     color: white;
     font-size: 20px;
@@ -114,7 +117,7 @@ input[type="button"]:active {
 }
 
 #streak {
-    margin-right: 2.5%;
+    margin-right: 1%;
     color: aliceblue;
 }
 

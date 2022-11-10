@@ -42,9 +42,10 @@ function LoginAccount() {
             localStorage.setItem("user_name", user.displayName);
             localStorage.setItem("user_uid", uid);
             console.log(user.displayName);
-            CheckAndUpdateStreak(user.displayName);
+            CheckAndUpdateStreak(loginEmailInput);
             // window.open("../html/SubjectPage.html","_self");
-            location.assign('/SubjectPage');
+            
+            
         })
         .catch((error) => {
             const errorCode = error.code;
@@ -70,7 +71,6 @@ function CreateAccount() {
     const createConfirmPasswordInput = document.getElementById("create_confirm_password_input").value.trim();
 
 
-
     if (createNameInput.length == 0 || createEmailInput.length == 0 || createPasswordInput.length == 0 || createConfirmPasswordInput.length == 0) {
         alert("Fill all the fields");
         return;
@@ -85,7 +85,7 @@ function CreateAccount() {
         alert("Passwords did not match");
         return;
     }
-    createStreakForUser(createNameInput);
+    
     createUserWithEmailAndPassword(auth, createEmailInput, createPasswordInput)
         .then((userCredential) => {
             const user = userCredential.user;
@@ -98,7 +98,8 @@ function CreateAccount() {
                     localStorage.setItem("user_name", user.displayName);
                     localStorage.setItem("user_uid", user.uid);
                     //window.open("../html/SubjectPage.html", "_self");
-                    location.assign('/SubjectPage');
+                    createStreakForUser(createEmailInput);
+                    
                 });
             }, function(error) {
                 console.log(error.code + ":" + error.message);
@@ -120,33 +121,49 @@ function CreateAccount() {
         });
 }
 
-async function createStreakForUser(createNameInput) {
+async function createStreakForUser(mailID) {
     try {
-        await fetch('/InitializeStreak', {
+        const res=await fetch('/InitializeStreak', {
             method: 'POST',
             body: JSON.stringify({
-                createNameInput: createNameInput
+                "mailID":mailID
             }),
             headers: {
                 'Content-Type': 'application/json'
             }
+        }).then(function(response) {
+            return (response.json());
         });
+        console.log(res.newStreak);
+        localStorage.setItem("streakValue",res.newStreak);
+        location.assign("/SubjectPage");
+
+
     } catch (e) {
         console.log(e);
     }
 }
 
-async function CheckAndUpdateStreak(name) {
+async function CheckAndUpdateStreak(mailID) {
     try {
-        await fetch('/CheckStreak', {
+
+        const res=await fetch('/CheckStreak', {
             method: 'POST',
             body: JSON.stringify({
-                name: name
+                "mailID":mailID
             }),
             headers: {
                 'Content-Type': 'application/json'
             }
-        })
+        }).then(function(response) {
+            return (response.json());
+        });
+
+        console.log(res.newStreak);
+        localStorage.setItem("streakValue",res.newStreak);
+        location.assign("/SubjectPage");
+    
+
     } catch (e) {
         console.log(e);
     }
