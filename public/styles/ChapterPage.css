@@ -77,6 +77,38 @@ input[type="button"]:active {
     transform: translateY(2px);
 }
 
+#aboutredirect {
+    margin-right: 2%;
+}
+
+#subjectredirect {
+    margin-right: 70%;
+}
+
+a:link {
+    color: rgb(163, 203, 163);
+    background-color: transparent;
+    text-decoration: none;
+}
+
+a:visited {
+    color: rgb(253, 214, 220);
+    background-color: transparent;
+    text-decoration: none;
+}
+
+a:hover {
+    color: rgb(0, 119, 255);
+    background-color: transparent;
+    text-decoration: underline;
+}
+
+a:active {
+    color: yellow;
+    background-color: transparent;
+    text-decoration: underline;
+}
+
 .edit_button,
 .delete_button {
     width: 60px;

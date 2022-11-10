@@ -100,7 +100,7 @@ input[type="button"]:active {
 }
 
 #status_bar #MainPage {
-    margin-right: 72%;
+    margin-right: 2%;
     text-decoration: none;
     color: white;
     font-size: 20px;
@@ -110,6 +110,34 @@ input[type="button"]:active {
     flex-wrap: nowrap;
     justify-content: left;
     align-items: left;
+}
+
+#aboutredirect {
+    margin-right: 70%;
+}
+
+a:link {
+    color: rgb(163, 203, 163);
+    background-color: transparent;
+    text-decoration: none;
+}
+
+a:visited {
+    color: rgb(253, 214, 220);
+    background-color: transparent;
+    text-decoration: none;
+}
+
+a:hover {
+    color: rgb(0, 119, 255);
+    background-color: transparent;
+    text-decoration: underline;
+}
+
+a:active {
+    color: yellow;
+    background-color: transparent;
+    text-decoration: underline;
 }
 
 #remainderbtn {

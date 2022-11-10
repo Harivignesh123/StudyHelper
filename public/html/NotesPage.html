@@ -1,44 +1,49 @@
 <html>
-    <head>
-        <title>Notes Page</title>
-        <link rel="stylesheet" type="text/css" href="../styles/NotesPage.css"/>
-    
-        <script src="https://apis.google.com/js/api.js"></script>
-        <script type="text/javascript" src="../modules/JSONapi.js"></script>
 
-    </head>
+<head>
+    <title>Notes Page</title>
+    <link rel="stylesheet" type="text/css" href="../styles/NotesPage.css" />
 
-    <body>
-        
-         <div id="status_bar">
-            <p class="subject_title"></p>
-            <div id="profile_container">
-                <img src="../res/images/user_icon.png"/>
-                <pre id="name">Name</pre>
-            </div>
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script type="text/javascript" src="../modules/JSONapi.js"></script>
+
+</head>
+
+<body>
+
+    <div id="status_bar">
+        <a href="/about" id="aboutredirect">About</a>
+        <a href="/SubjectPage" id="subjectredirect">SubjectPage</a>
+        <p class="subject_title"></p>
+        <div id="profile_container">
+
+            <img src="../res/images/user_icon.png" />
+            <pre id="name">Name</pre>
         </div>
-        <h2 id="chapter_title">Chapter name</h2>
-        <div id="parent_container">
-            <div id="topics_list_container">
-                <input type="button" class="add_topic" value="add"></button>
-                <ul>
-                
-                </ul>
-            </div>
-        
-            <div id="notes_list_container">
-                
-            </div>
-        
-            <div id="ref_links_container">
-                <ul id="ref_links_list">
+    </div>
+    <h2 id="chapter_title">Chapter name</h2>
+    <div id="parent_container">
+        <div id="topics_list_container">
+            <input type="button" class="add_topic" value="add"></button>
+            <ul>
 
-                </ul>
-            </div>
+            </ul>
         </div>
-        
 
-        <script type="module" src="../scripts/NotesPage.js"></script>
-        
-    </body>
+        <div id="notes_list_container">
+
+        </div>
+
+        <div id="ref_links_container">
+            <ul id="ref_links_list">
+
+            </ul>
+        </div>
+    </div>
+
+
+    <script type="module" src="../scripts/NotesPage.js"></script>
+
+</body>
+
 </html>

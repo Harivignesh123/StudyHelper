@@ -84,6 +84,14 @@ a {
     font-size: 20px;
 }
 
+#aboutredirect {
+    margin-left: 2%;
+}
+
+#subjectredirect {
+    margin-left: 10px;
+}
+
 a:link {
     color: rgb(163, 203, 163);
     background-color: transparent;
