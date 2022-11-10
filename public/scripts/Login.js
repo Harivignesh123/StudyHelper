@@ -3,7 +3,17 @@ import { profileNameLength } from "../modules/Contract.js";
 
 const loginAccountButton = document.getElementById("login_account_button");
 const createAccountButton = document.getElementById("create_account_button");
+const preLoader=document.getElementById("pre_loader");
 
+if (document.addEventListener) {
+    document.addEventListener("DOMContentLoaded", function() {
+        preLoader.style.visibility="hidden";
+    }, false);
+} else {
+    document.attachEvent("onDOMContentLoaded", function() {
+        preLoader.style.visibility="hidden";
+    });
+}
 
 if (loginAccountButton.addEventListener) {
     loginAccountButton.addEventListener("click", function() {
@@ -124,6 +134,7 @@ function CreateAccount() {
 }
 
 async function createStreakForUser(mailID) {
+    preLoader.style.visibility="visible";
     try {
         const res=await fetch('/InitializeStreak', {
             method: 'POST',
@@ -138,6 +149,7 @@ async function createStreakForUser(mailID) {
         });
         console.log(res.newStreak);
         localStorage.setItem("streakValue",res.newStreak);
+        preLoader.style.visibility="hidden";
         location.assign("/SubjectPage");
 
 
@@ -147,6 +159,7 @@ async function createStreakForUser(mailID) {
 }
 
 async function CheckAndUpdateStreak(mailID) {
+    preLoader.style.visibility="visible";
     try {
 
         const res=await fetch('/CheckStreak', {
@@ -163,6 +176,7 @@ async function CheckAndUpdateStreak(mailID) {
 
         console.log(res.newStreak);
         localStorage.setItem("streakValue",res.newStreak);
+        preLoader.style.visibility="hidden";
         location.assign("/SubjectPage");
     
 
