@@ -153,12 +153,12 @@ input[type="button"] {
 }
 
 input[type="button"]:hover {
-    transform: scale(1.2);
+    transform: scale(1.09);
 }
 
 input[type="button"]:active {
     box-shadow: 0 2px #666;
-    transform: translateY(4px);
+    transform: translateY(2px);
 }
 
 .add_topic {
