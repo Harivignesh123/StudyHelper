@@ -77,8 +77,35 @@ body {
 }
 
 #topics_list_container li {
-    font-size: 20px;
     margin-bottom: 10px;
+}
+
+a {
+    font-size: 20px;
+}
+
+a:link {
+    color: rgb(163, 203, 163);
+    background-color: transparent;
+    text-decoration: none;
+}
+
+a:visited {
+    color: rgb(253, 214, 220);
+    background-color: transparent;
+    text-decoration: none;
+}
+
+a:hover {
+    color: rgb(0, 119, 255);
+    background-color: transparent;
+    text-decoration: underline;
+}
+
+a:active {
+    color: yellow;
+    background-color: transparent;
+    text-decoration: underline;
 }
 
 #notes_list_container {
@@ -150,6 +177,10 @@ input[type="button"] {
     border: 1px solid white;
     cursor: pointer;
     box-shadow: 0 3px #999;
+}
+
+#ref_links_list li {
+    text-decoration: none;
 }
 
 input[type="button"]:hover {
